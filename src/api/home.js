@@ -495,6 +495,21 @@ function videoInfo(videoId) {
   };
   return axios.post("/api/user/videoInfo", data);
 }
+// 添加浏览量
+function addViews(videoId) {
+  const data = {
+    videoId
+  };
+  return axios.post("/api/user/addViews", data);
+}
+
+// 添加用户观看记录
+function addVideoHistory(video_id) {
+  const data = {
+    video_id
+  };
+  return axios.post("/api/user/addVideoHistory", data);
+}
 
 export {
   login,
@@ -553,5 +568,7 @@ export {
   uploadImg,
   userVerify,
   verifyStatus,
-  videoInfo
+  videoInfo,
+  addViews,
+  addVideoHistory
 };
