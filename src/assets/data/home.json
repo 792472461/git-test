@@ -1,0 +1,436 @@
+{ 
+"bigImg" : "http://localhost:8080/img/99999.518230e9.png",
+"data" : {
+    "home" : {
+        "id": 1,
+        "title" : "首页",
+        "video" : null
+    },
+    "show" : {
+        "id": 2,
+        "title" : "第一届show大赛",
+        "title2" : "打榜",
+        "firstVideo" : 
+            {
+                "id" : 1,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+        "twolist" :
+            [
+                {
+                    "id" : 2,
+                    "name" : "雷",
+                    "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                    "see" : "3.2万",
+                    "love" : "5888",
+                    "share" : "1395",
+                    "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                    "videoTime" : "76:15"
+                },
+                {
+                    "id" : 3,
+                    "name" : "欧阳娜娜",
+                    "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                    "see" : "3.2万",
+                    "love" : "5888",
+                    "share" : "1395",
+                    "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                    "videoTime" : "76:15"
+                },
+                {
+                    "id" : 4,
+                    "name" : "张杰",
+                    "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                    "see" : "3.2万",
+                    "love" : "5888",
+                    "share" : "1395",
+                    "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                    "videoTime" : "76:15"
+                },
+                {
+                    "id" : 5,
+                    "name" : "",
+                    "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                    "see" : "3.2万",
+                    "love" : "5888",
+                    "share" : "1395",
+                    "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                    "videoTime" : "76:15"
+                }
+            ]
+    },
+    "Vlog" :{
+        "id": 3,
+        "title" : "Vlog",
+        "video" : 
+            [
+                {
+                    "id" : 1,
+                    "name" : "周杰伦",
+                    "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                    "see" : "3.2万",
+                    "love" : "5888",
+                    "share" : "1395",
+                    "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                    "videoTime" : "76:15"
+                },
+                {
+                    "id" : 2,
+                    "name" : "周杰伦",
+                    "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                    "see" : "3.2万",
+                    "love" : "5888",
+                    "share" : "1395",
+                    "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                    "videoTime" : "76:15"
+                },
+                {
+                    "id" : 3,
+                    "name" : "周杰伦",
+                    "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                    "see" : "3.2万",
+                    "love" : "5888",
+                    "share" : "1395",
+                    "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                    "videoTime" : "76:15"
+                },
+                {
+                    "id" : 4,
+                    "name" : "周杰伦",
+                    "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                    "see" : "3.2万",
+                    "love" : "5888",
+                    "share" : "1395",
+                    "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                    "videoTime" : "76:15"
+                },
+                {
+                    "id" : 5,
+                    "name" : "周杰伦",
+                    "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                    "see" : "3.2万",
+                    "love" : "5888",
+                    "share" : "1395",
+                    "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                    "videoTime" : "76:15"
+                },
+                {
+                    "id" : 6,
+                    "name" : "周杰伦",
+                    "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                    "see" : "3.2万",
+                    "love" : "5888",
+                    "share" : "1395",
+                    "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                    "videoTime" : "76:15"
+                },
+                {
+                    "id" : 7,
+                    "name" : "周杰伦",
+                    "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                    "see" : "3.2万",
+                    "love" : "5888",
+                    "share" : "1395",
+                    "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                    "videoTime" : "76:15"
+                },
+                {
+                    "id" : 8,
+                    "name" : "周杰伦",
+                    "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                    "see" : "3.2万",
+                    "love" : "5888",
+                    "share" : "1395",
+                    "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                    "videoTime" : "76:15"
+                }
+            ]
+        },
+    "now" : {
+        "id": 4,
+        "title" : "现场",
+        "video" : 
+        [
+            {
+                "id" : 1,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 2,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 3,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 4,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 5,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 6,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 7,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 8,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            }
+        ]
+    },
+    "openB" : {
+        "id": 5,
+        "title" : "开箱",
+        "video" : 
+        [
+            {
+                "id" : 1,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 2,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 3,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 4,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 5,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 6,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 7,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            },
+            {
+                "id" : 8,
+                "name" : "周杰伦",
+                "content" : "周杰伦现身录音室开始录歌与朋友与朋友一起边喝周杰伦现身录音室开始录歌与朋友与朋友一起边喝",
+                "see" : "3.2万",
+                "love" : "5888",
+                "share" : "1395",
+                "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+                "videoTime" : "76:15"
+            }
+        ]
+    },
+    "other" : {
+        "id": 6,
+        "title" : "其他",
+        "video" : null
+    },
+    "news": 
+    [
+        {
+            "id" : 1,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        },
+        {
+            "id" : 2,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        },
+        {
+            "id" : 3,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        },
+        {
+            "id" : 4,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        },
+        {
+            "id" : 5,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        },
+        {
+            "id" : 6,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        },
+        {
+            "id" : 7,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        },
+        {
+            "id" : 8,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        },
+        {
+            "id" : 9,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        },
+        {
+            "id" : 10,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        },
+        {
+            "id" : 11,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        },
+        {
+            "id" : 12,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        },
+        {
+            "id" : 13,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        },
+        {
+            "id" : 14,
+            "img" : "http://localhost:8080/img/zjl.3ff98368.png",
+            "content" : "欢迎大家五一来玩，六六六",
+            "see" : "3.0万",
+            "love" : "5888"
+        }
+    ]
+}
+}
