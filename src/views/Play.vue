@@ -86,8 +86,11 @@
             :options="playerOptions"
             @play="onPlayerPlay($event)"
             @pause="onPlayerPause($event)"
+            @ended="onPlayerEnded($event)"
+            @statechanged="playerStateChanged($event)"
           />
         </div>
+
         <div class="share">
           <div class="seeLove">
             <p class="first">
@@ -462,7 +465,9 @@ import {
   addReplyLikes,
   cancelReplyLikes,
   treadReply,
-  cancelTreadReply
+  cancelTreadReply,
+  addViews,
+  addVideoHistory
 } from "../api/home.js";
 // import { setInterval, clearInterval } from "timers";
 import Cookies from "js-cookie";
@@ -522,7 +527,7 @@ export default {
       comment2: "",
       videoCommentList: [],
       playerOptions: {
-        playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
+        // playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
         autoplay: false, //如果true,浏览器准备好时开始回放。
         muted: false, // 默认情况下将会消除任何音频。
         loop: false, // 导致视频一结束就重新开始。
@@ -530,15 +535,13 @@ export default {
         language: "zh-CN",
         aspectRatio: "16:9", // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
         fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
-        sources: [
-          {
-            type: "video/mp4",
-            src: "" //你的视频地址（必填）
-          }
-        ]
+        sources: []
         // poster: "poster.jpg", //你的封面地址
         // width: document.documentElement.clientWidth
-      }
+      },
+      browsingDuration: 0, // 浏览时长
+      timer: null,
+      isIncreased: false
     };
   },
   inject: ["reload"],
@@ -555,19 +558,11 @@ export default {
     },
     currentPage() {
       return this.$route.query.page || 1;
+    },
+    player() {
+      return this.$refs.videoPlayer.videoPlayer;
     }
   },
-  // mounted() {
-  //   var $config = {
-  //     title: '234',
-  //     description: '123',
-  //     wechatQrcodeTitle: '微信扫一扫：分享', // 微信二维码提示文字
-  //     wechatQrcodeHelper:
-  //       '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>'
-  //   }
-
-  //   socialShare('.social-share-cs', $config)
-  // },
   methods: {
     fxiang() {
       if (this.lock4 === true) {
@@ -582,6 +577,7 @@ export default {
         return;
       }
     },
+
     shareTo(stype) {
       var linkVal = window.location.href;
       var ftit = this.videoName;
@@ -980,8 +976,43 @@ export default {
         this._vedioInfo(this.videoId);
       }
     },
-    onPlayerPlay() {},
-    onPlayerPause() {},
+    onPlayerPlay(player) {
+      console.log("player play!", player);
+      if (this.browsingDuration < 120 && !this.isIncreased) {
+        this.timer = setInterval(() => {
+          if (this.browsingDuration > 120) {
+            this.watchedThisViedo();
+            this.timer && clearInterval(this.timer);
+          }
+          this.browsingDuration += 1;
+        }, 1000);
+      }
+    },
+    onPlayerPause(player) {
+      console.log("player pause!", player);
+      this.timer && clearInterval(this.timer);
+    },
+    onPlayerEnded(player) {
+      console.log(player);
+      if (!this.isIncreased) {
+        this.watchedThisViedo();
+      }
+    },
+    // player is ready
+    playerReadied(player) {
+      console.log("the player is readied", player);
+      // you can use it to do something...
+      // player.[methods]
+    },
+    playerStateChanged(playerCurrentState) {
+      console.log("player current update state", playerCurrentState);
+    },
+    watchedThisViedo() {
+      this.isIncreased = true;
+      this.list.browse_num++;
+      addViews(this.videoId);
+      addVideoHistory(this.videoId);
+    },
     follow() {
       this._followUser(this.userId);
     },
@@ -1193,8 +1224,13 @@ export default {
     height: 676px;
     position: relative;
     /deep/ .vjs-big-play-button {
-      margin-left: 50%;
-      margin-top: 25%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    /deep/ .vjs-button > .vjs-icon-placeholder:before {
+      font-size: 2.18em;
     }
     &:hover .control {
       display: block;

@@ -455,6 +455,22 @@ function accounStatus() {
   return axios.post("/api/user/accounStatus");
 }
 
+// 添加浏览量
+function addViews(videoId) {
+  const data = {
+    videoId
+  };
+  return axios.post("/api/user/addViews", data);
+}
+
+// 添加用户观看记录
+function addVideoHistory(video_id) {
+  const data = {
+    video_id
+  };
+  return axios.post("/api/user/addVideoHistory", data);
+}
+
 export {
   login,
   checkNickname,
@@ -508,5 +524,7 @@ export {
   addLabel,
   deleteVideo,
   bindEmail,
-  accounStatus
+  accounStatus,
+  addViews,
+  addVideoHistory
 };
