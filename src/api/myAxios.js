@@ -3,6 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import bus from "../util/bus";
 import route from "../router";
+import store from "../store";
 
 // 封装axios
 const myAxios = axios.create({
@@ -34,11 +35,12 @@ myAxios.interceptors.response.use(
     // status ==200请求成功
     // 只要data里面的  不关心请求头  或者请求体  只关心响应
     if (response.status === 200) {
-      // if (response.data.code === "-1") {
-      //   // return response.data
-      //   bus.$message.error("请重新登录");
-      //   route.push("/login");
-      // }
+      if (response.data.code === "-1") {
+        // return response.data
+        // bus.$message.error("请重新登录");
+        // route.push("/login");
+        store.commit("EXIT");
+      }
       return response.data;
     }
     return response;

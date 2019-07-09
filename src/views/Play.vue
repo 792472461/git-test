@@ -9,19 +9,13 @@
             <p class="timer">{{ list.time }}</p>
           </div>
           <div class="tit-right">
-            <div
-              @click="toMine(list.user_id)"
-              class="imgT"
-            >
+            <div @click="toMine(list.user_id)" class="imgT">
               <img :src="list.avatar" />
             </div>
             <div class="adds">
               <p class="names">{{ list.nickname }}</p>
               <p>
-                <button
-                  v-show="followId == 0"
-                  @click="follow"
-                >
+                <button v-show="followId == 0" @click="follow">
                   +关注&nbsp;&nbsp;{{ list.fansNum }}
                 </button>
               </p>
@@ -99,7 +93,7 @@
             <p class="first">
               <img src="@/assets/images/home/llan.png" /><span>{{
                 list.browse_num
-                }}</span>
+              }}</span>
             </p>
             <p>
               <img
@@ -126,9 +120,7 @@
                 @click="fxiang"
                 class="fxiang"
                 src="@/assets/images/home/fxiang.png"
-              /><span>{{
-                list.share_num
-                }}</span>
+              /><span>{{ list.share_num }}</span>
             </p>
           </div>
           <div class="comp">
@@ -141,34 +133,31 @@
           </div>
         </div>
 
-        <div
-          class="fenx"
-          v-show="fxiangId"
-        >
+        <div class="fenx" v-show="fxiangId">
           <div class="fl">分享到：</div>
           <div @click="shareTo('qzone')">
             <img
               src="http://zixuephp.net/static/images/qqzoneshare.png"
               width="30"
-            >
+            />
           </div>
           <div @click="shareTo('qq')">
             <img
               src="http://zixuephp.net/static/images/qqshare.png"
               width="32"
-            >
+            />
           </div>
           <div @click="shareTo('sina')">
             <img
               src="http://zixuephp.net/static/images/sinaweiboshare.png"
               width="36"
-            >
+            />
           </div>
           <div @click="shareTo('wechat')">
             <img
               src="http://zixuephp.net/static/images/wechatshare.png"
               width="32"
-            >
+            />
           </div>
         </div>
 
@@ -180,32 +169,29 @@
               class="bq"
               v-for="(item, index) in list.video_label"
               :key="index"
-            >{{ item }}</span>
+              >{{ item }}</span
+            >
           </div>
         </div>
       </div>
-      <div
-        class="dont"
-        v-show="dontId"
-      ><i @click="cancelf">x</i>
+      <div class="dont" v-show="dontId">
+        <i @click="cancelf">x</i>
         <p>不能关注自己</p>
       </div>
       <!-- 视频简介结束 -->
       <div class="comment">
         <div class="preComment">
           <div class="comment-tit">
-            <div
-              class="headImg"
-              @click="toMine(list.user_id)"
-            >
+            <div class="headImg" @click="toMine(list.user_id)">
               <img :src="list.avatar" />
             </div>
             <div class="headname">
               <span @click="$router.push(`/perHome?userId=${list.user_id}`)">{{
                 list.nickname
-                }}</span><img src="" />
+              }}</span
+              ><img src="" />
             </div>
-            <div class="headnumber">{{remnant}}/300</div>
+            <div class="headnumber">{{ remnant }}/300</div>
           </div>
           <div class="sayIdea">
             <textarea
@@ -225,10 +211,7 @@
           <div class="allComment-tit">
             全部评论
           </div>
-          <div
-            class="gap"
-            v-show="videoCommentList.length == 0"
-          >
+          <div class="gap" v-show="videoCommentList.length == 0">
             <img src="~@/assets/images/home/kongbaiye.png" />
             <p>暂时还没有人评论~</p>
           </div>
@@ -240,27 +223,25 @@
             >
               <div class="lists-con">
                 <div class="comment-left">
-                  <img
-                    :src="item.avatar"
-                    @click="toMine(item.user_id)"
-                  />
+                  <img :src="item.avatar" @click="toMine(item.user_id)" />
                   <button
                     v-show="item.isFollow === 0"
                     @click="fUser(item.user_id)"
-                  >关注</button>
+                  >
+                    关注
+                  </button>
                   <button
                     v-show="item.isFollow === 1"
                     @click="cancelfUser(item.user_id)"
                     style="background: #ccc;"
-                  >已关注</button>
+                  >
+                    已关注
+                  </button>
                 </div>
                 <div class="comment-right">
                   <div class="rig-name">
                     <span>{{ item.nickname }}</span>
-                    <img
-                      src=""
-                      alt=""
-                    />
+                    <img src="" alt="" />
                   </div>
 
                   <div class="rig-con">
@@ -273,14 +254,30 @@
                     <div class="icon">
                       <div class="icons">
                         <img
-                          @click="item.isLike == 0 ? dzan(item.id) : cancelDzan(item.id)"
-                          :src="item.isLike == 0 ? require('@/assets/images/home/dzan.png') : require('@/assets/images/home/dzan1.png')"
+                          @click="
+                            item.isLike == 0
+                              ? dzan(item.id)
+                              : cancelDzan(item.id)
+                          "
+                          :src="
+                            item.isLike == 0
+                              ? require('@/assets/images/home/dzan.png')
+                              : require('@/assets/images/home/dzan1.png')
+                          "
                         /><span class="numbe">{{ item.likes }}</span>
                       </div>
                       <div class="icons">
                         <img
-                          @click="item.isTread == 0 ? cai(item.id) : cancelCai(item.id)"
-                          :src="item.isTread == 0 ? require('@/assets/images/home/cai.png') : require('@/assets/images/home/cai1.png')"
+                          @click="
+                            item.isTread == 0
+                              ? cai(item.id)
+                              : cancelCai(item.id)
+                          "
+                          :src="
+                            item.isTread == 0
+                              ? require('@/assets/images/home/cai.png')
+                              : require('@/assets/images/home/cai1.png')
+                          "
                         /><span class="numbe">{{ item.tread_num }}</span>
                       </div>
                       <div class="icons">
@@ -290,10 +287,7 @@
                         />
                         <span class="numbe">{{ item.reply.length }}</span>
                       </div>
-                      <div
-                        class="icons"
-                        @click="complain1(item.id)"
-                      >
+                      <div class="icons" @click="complain1(item.id)">
                         <img src="@/assets/images/home/wjing.png" />
                       </div>
                     </div>
@@ -301,24 +295,12 @@
                 </div>
               </div>
               <!-- 回复框 -->
-              <div
-                class="reply"
-                v-show="replyInputId === index"
-              >
-                <img
-                  class="name"
-                  :src="avatar"
-                />
+              <div class="reply" v-show="replyInputId === index">
+                <img class="name" :src="avatar" />
                 <textarea v-model="replyContent"></textarea>
-                <div
-                  class="sure"
-                  @click="sureReply(item.id)"
-                >确定</div>
+                <div class="sure" @click="sureReply(item.id)">确定</div>
               </div>
-              <div
-                class="sub"
-                v-if="item.reply.length !== 0"
-              >
+              <div class="sub" v-if="item.reply.length !== 0">
                 <video-comment
                   :index="index"
                   :itemId="item.id"
@@ -328,57 +310,50 @@
                   @hfcancelDzan="hfcancelDzan"
                   @hfcai="hfcai"
                   @hfcancelCai="hfcancelCai"
-                  :data="!item.brandFold ? item.reply.slice(0, 3) : item.reply "
+                  :data="!item.brandFold ? item.reply.slice(0, 3) : item.reply"
                   :replyInputId.sync="replyInputId"
                 ></video-comment>
                 <!-- 查看更多二级评论 -->
-                <div
-                  v-if="item.reply.length > 3"
-                  class="sub-more"
-                >
-                  <span @click="changeFoldState(index)">共{{item.reply.length}}条回复&nbsp;</span>
-                  <i @click="changeFoldState(index)">{{!item.brandFold ? '点击查看':'收起'}}</i>
+                <div v-if="item.reply.length > 3" class="sub-more">
+                  <span @click="changeFoldState(index)"
+                    >共{{ item.reply.length }}条回复&nbsp;</span
+                  >
+                  <i @click="changeFoldState(index)">{{
+                    !item.brandFold ? "点击查看" : "收起"
+                  }}</i>
                 </div>
               </div>
             </li>
           </ul>
           <!-- 一级评论分页 -->
-          <div
-            class="feny"
-            v-show="allTotal > 1"
-          >
+          <div class="feny" v-show="allTotal > 1">
             <el-pagination
               background
               layout="prev, pager, next"
               :current-page="+currentPage"
               :page-size="12"
-              :total=total
+              :total="total"
               @current-change="handleCurrentChange"
             >
             </el-pagination>
           </div>
-
         </div>
       </div>
     </div>
     <!-- 举报1 -->
-    <div
-      class="background"
-      v-show="complains"
-    >
+    <div class="background" v-show="complains">
       <div class="jbBox">
         <div class="jb-tit">举报 <i @click="dlt()">x</i></div>
         <div class="jb-con">
-          <div
-            v-for="rule in rules"
-            :key="rule.id"
-          >
-            <label><input
+          <div v-for="rule in rules" :key="rule.id">
+            <label
+              ><input
                 name="ts"
                 type="radio"
                 value=""
                 @click="checkedNames1(rule.id)"
-              />{{rule.title}} </label>
+              />{{ rule.title }}
+            </label>
           </div>
         </div>
         <div class="jb-dirct">
@@ -390,29 +365,27 @@
             rows="10"
             v-model="comment1"
           ></textarea>
-          <span class="number">{{remnant1}}/400</span>
+          <span class="number">{{ remnant1 }}/400</span>
         </div>
-        <div class="submit"><button @click="submitTs(list.id, 1)">提交</button></div>
+        <div class="submit">
+          <button @click="submitTs(list.id, 1)">提交</button>
+        </div>
       </div>
     </div>
     <!-- 举报2 -->
-    <div
-      class="background"
-      v-show="complains1"
-    >
+    <div class="background" v-show="complains1">
       <div class="jbBox">
         <div class="jb-tit">举报 <i @click="dlt()">x</i></div>
         <div class="jb-con">
-          <div
-            v-for="rule in rules"
-            :key="rule.id"
-          >
-            <label><input
+          <div v-for="rule in rules" :key="rule.id">
+            <label
+              ><input
                 name="ts"
                 type="radio"
                 value=""
                 @click="checkedNames1(rule.id)"
-              />{{rule.title}} </label>
+              />{{ rule.title }}
+            </label>
           </div>
         </div>
         <div class="jb-dirct">
@@ -424,30 +397,26 @@
             rows="10"
             v-model="comment1"
           ></textarea>
-          <span class="number">{{remnant1}}/400</span>
+          <span class="number">{{ remnant1 }}/400</span>
         </div>
         <div class="submit"><button @click="submitTs1(2)">提交</button></div>
       </div>
     </div>
 
     <!-- 举报3 -->
-    <div
-      class="background"
-      v-show="complains2"
-    >
+    <div class="background" v-show="complains2">
       <div class="jbBox">
         <div class="jb-tit">举报 <i @click="dlt()">x</i></div>
         <div class="jb-con">
-          <div
-            v-for="rule in rules"
-            :key="rule.id"
-          >
-            <label><input
+          <div v-for="rule in rules" :key="rule.id">
+            <label
+              ><input
                 name="ts"
                 type="radio"
                 value=""
                 @click="checkedNames1(rule.id)"
-              />{{rule.title}} </label>
+              />{{ rule.title }}
+            </label>
           </div>
         </div>
         <div class="jb-dirct">
@@ -459,26 +428,20 @@
             rows="10"
             v-model="comment1"
           ></textarea>
-          <span class="number">{{remnant1}}/400</span>
+          <span class="number">{{ remnant1 }}/400</span>
         </div>
         <div class="submit"><button @click="submitTs2(3)">提交</button></div>
       </div>
     </div>
 
     <!-- 举报成功 -->
-    <div
-      v-show="jbcgId"
-      class="jbcg"
-    >举报成功</div>
-    <div
-      v-show="cfjbId"
-      class="jbcg"
-    >请不要重复举报</div>
+    <div v-show="jbcgId" class="jbcg">举报成功</div>
+    <div v-show="cfjbId" class="jbcg">请不要重复举报</div>
     <footer>暂无页脚</footer>
   </div>
 </template>
 <script>
-import 'video.js/dist/video-js.css'
+import "video.js/dist/video-js.css";
 import {
   vedioInfo,
   followUser,
@@ -500,25 +463,25 @@ import {
   cancelReplyLikes,
   treadReply,
   cancelTreadReply
-} from '../api/home.js'
+} from "../api/home.js";
 // import { setInterval, clearInterval } from "timers";
-import Cookies from 'js-cookie'
-import { videoPlayer } from 'vue-video-player'
-import videoComment from '../components/VideoComment'
+import Cookies from "js-cookie";
+import { videoPlayer } from "vue-video-player";
+import videoComment from "../components/VideoComment";
 export default {
   data() {
     return {
-      allTotal: '',
+      allTotal: "",
       total: 0,
       fxiangId: false,
-      introduce: '',
-      videoName: '',
-      hfId: '',
-      plId: '',
+      introduce: "",
+      videoName: "",
+      hfId: "",
+      plId: "",
       cfjbId: false,
       jbcgId: false,
       rules: [],
-      checkedNames: '',
+      checkedNames: "",
       remnant: 0,
       remnant1: 0,
       stateId: false,
@@ -528,70 +491,70 @@ export default {
       lock1: true,
       lock2: true,
       lock4: true,
-      replyContent: '',
-      replyContent1: '',
+      replyContent: "",
+      replyContent1: "",
       replySecondId: false,
       replyInputId: false,
-      avatar: '',
-      fUserId: '',
+      avatar: "",
+      fUserId: "",
       dontId: false,
-      isCollect: '',
-      isLike: '',
+      isCollect: "",
+      isLike: "",
       currentCommentShow: null,
-      userId: '',
-      followId: '',
+      userId: "",
+      followId: "",
       list: {},
       startPlay: true,
       Progs: false,
-      w: '30%',
-      lft: '10',
+      w: "30%",
+      lft: "10",
       interval: null,
-      cont: '',
-      totalTime: '',
-      nowTime: '',
-      blocks: 'none',
+      cont: "",
+      totalTime: "",
+      nowTime: "",
+      blocks: "none",
       move: 1,
       complains: 0,
       complains1: 0,
       complains2: 0,
-      comment: '',
-      comment1: '',
-      comment2: '',
+      comment: "",
+      comment1: "",
+      comment2: "",
       videoCommentList: [],
       playerOptions: {
         playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
         autoplay: false, //如果true,浏览器准备好时开始回放。
         muted: false, // 默认情况下将会消除任何音频。
         loop: false, // 导致视频一结束就重新开始。
-        preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
-        language: 'zh-CN',
-        aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+        preload: "auto", // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+        language: "zh-CN",
+        aspectRatio: "16:9", // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
         fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
         sources: [
           {
-            type: 'video/mp4',
-            src: '' //你的视频地址（必填）
+            type: "video/mp4",
+            src: "" //你的视频地址（必填）
           }
         ]
         // poster: "poster.jpg", //你的封面地址
         // width: document.documentElement.clientWidth
       }
-    }
+    };
   },
-  inject: ['reload'],
+  inject: ["reload"],
   created() {
-    this._vedioInfo(this.videoId)
-    var limit = 12
-    var page = this.currentPage
-    this._getCommentList(limit, page)
-    this._reportRules()
+    this._vedioInfo(this.videoId);
+    var limit = 12;
+    var page = this.currentPage;
+    this._getCommentList(limit, page);
+    this._reportRules();
   },
   computed: {
     videoId() {
-      return this.$route.query.videoId
+      return this.$route.query.videoId;
     },
     currentPage() {
-      return this.$route.query.page || 1
+      return this.$route.query.page || 1;
     }
   },
   // mounted() {
@@ -608,449 +571,449 @@ export default {
   methods: {
     fxiang() {
       if (this.lock4 === true) {
-        this.fxiangId = true
-        this.lock4 = false
-        return
+        this.fxiangId = true;
+        this.lock4 = false;
+        return;
       }
 
       if (this.lock4 === false) {
-        this.fxiangId = false
-        this.lock4 = true
-        return
+        this.fxiangId = false;
+        this.lock4 = true;
+        return;
       }
     },
     shareTo(stype) {
-      var linkVal = window.location.href
-      var ftit = this.videoName
-      var lk = 'http://fans.mimanduo.xyz/img/pfen.0abb0695.png'
-      var introduce = '扑粉网-粉丝打榜网站'
+      var linkVal = window.location.href;
+      var ftit = this.videoName;
+      var lk = "http://fans.mimanduo.xyz/img/pfen.0abb0695.png";
+      var introduce = "扑粉网-粉丝打榜网站";
       //qq空间接口的传参
-      if (stype == 'qzone') {
+      if (stype == "qzone") {
         window.open(
           `https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${linkVal}?sharesource=qzone&title=${ftit}&pics=${lk}&summary=${introduce}`
-        )
+        );
       }
       //新浪微博接口的传参
-      if (stype == 'sina') {
+      if (stype == "sina") {
         window.open(
           `http://service.weibo.com/share/share.php?url=${linkVal}?sharesource=weibo&title=${ftit}&pic=${lk}&appkey=2706825840`
-        )
+        );
       }
       //qq好友接口的传参
-      if (stype == 'qq') {
+      if (stype == "qq") {
         window.open(
           `http://connect.qq.com/widget/shareqq/index.html?url=${linkVal}?sharesource=qzone&title=${ftit}&pics=${lk}&summary=${introduce}`
-        )
+        );
       }
       //生成二维码给微信扫描分享，php生成，也可以用jquery.qrcode.js插件实现二维码生成
-      if (stype == 'wechat') {
-        window.open(`http://zixuephp.net/inc/qrcode_img.php?url=${linkVal}`)
+      if (stype == "wechat") {
+        window.open(`http://zixuephp.net/inc/qrcode_img.php?url=${linkVal}`);
       }
     },
 
     // 点赞评论
     dzan(id) {
-      this._addCommentLikes(id)
+      this._addCommentLikes(id);
     },
     // 取消点赞评论
     cancelDzan(id) {
-      this._cancelCommentLikes(id)
+      this._cancelCommentLikes(id);
     },
 
     // 点赞评论
     async _addCommentLikes(id) {
-      const res = await addCommentLikes(id)
-      if (res.code === '1') {
-        this._getCommentList()
+      const res = await addCommentLikes(id);
+      if (res.code === "1") {
+        this._getCommentList();
       }
     },
 
     // 取消点赞评论
     async _cancelCommentLikes(id) {
-      const res = await cancelCommentLikes(id)
-      if (res.code === '1') {
-        this._getCommentList()
+      const res = await cancelCommentLikes(id);
+      if (res.code === "1") {
+        this._getCommentList();
       }
     },
     hfdzan(id) {
-      this._addReplyLikes(id)
+      this._addReplyLikes(id);
     },
     hfcancelDzan(id) {
-      this._cancelReplyLikes(id)
+      this._cancelReplyLikes(id);
     },
     hfcai(id) {
-      this._treadReply(id)
+      this._treadReply(id);
     },
     hfcancelCai(id) {
-      this._cancelTreadReply(id)
+      this._cancelTreadReply(id);
     },
     // 点赞回复
     async _addReplyLikes(id) {
-      const res = await addReplyLikes(id)
-      if (res.code === '1') {
-        this._getCommentList()
+      const res = await addReplyLikes(id);
+      if (res.code === "1") {
+        this._getCommentList();
       }
     },
 
     // 取消点赞回复
     async _cancelReplyLikes(id) {
-      const res = await cancelReplyLikes(id)
-      if (res.code === '1') {
-        this._getCommentList()
+      const res = await cancelReplyLikes(id);
+      if (res.code === "1") {
+        this._getCommentList();
       }
     },
 
     // 踩回复
     async _treadReply(id) {
-      const res = await treadReply(id)
-      if (res.code === '1') {
-        this._getCommentList()
+      const res = await treadReply(id);
+      if (res.code === "1") {
+        this._getCommentList();
       }
     },
 
     // 取消踩回复
     async _cancelTreadReply(id) {
-      const res = await cancelTreadReply(id)
-      if (res.code === '1') {
-        this._getCommentList()
+      const res = await cancelTreadReply(id);
+      if (res.code === "1") {
+        this._getCommentList();
       }
     },
 
     // 踩评论
     cai(id) {
-      this._treadComment(id)
+      this._treadComment(id);
     },
     // 取消踩评论
     cancelCai(id) {
-      this._cancelTreadComment(id)
+      this._cancelTreadComment(id);
     },
 
     // 踩评论
     async _treadComment(id) {
-      const res = await treadComment(id)
-      if (res.code === '1') {
-        this._getCommentList()
+      const res = await treadComment(id);
+      if (res.code === "1") {
+        this._getCommentList();
       }
     },
     // 取消踩评论
     async _cancelTreadComment(id) {
-      const res = await cancelTreadComment(id)
-      if (res.code === '1') {
-        this._getCommentList()
+      const res = await cancelTreadComment(id);
+      if (res.code === "1") {
+        this._getCommentList();
       }
     },
 
     descInput() {
-      var txtVal = this.comment.length
-      this.remnant = txtVal
+      var txtVal = this.comment.length;
+      this.remnant = txtVal;
     },
 
     changeFoldState(index) {
       this.$set(this.videoCommentList, index, {
         ...this.videoCommentList[index],
         brandFold: !this.videoCommentList[index].brandFold
-      })
+      });
     },
 
     replyInput(index) {
       if (this.lock === true) {
-        this.replyInputId = index
-        this.replySecondId = false
-        this.lock = false
-        return
+        this.replyInputId = index;
+        this.replySecondId = false;
+        this.lock = false;
+        return;
       }
 
       if (this.lock === false) {
-        this.replyInputId = false
-        this.lock = true
-        return
+        this.replyInputId = false;
+        this.lock = true;
+        return;
       }
     },
     complain() {
-      this.complains = 1
+      this.complains = 1;
     },
 
     complain1(id) {
-      this.plId = id
-      this.complains1 = 1
+      this.plId = id;
+      this.complains1 = 1;
     },
 
     tsBox(id, hfId) {
-      this.hfId = hfId
-      this.complains2 = 1
+      this.hfId = hfId;
+      this.complains2 = 1;
     },
 
     dlt() {
-      this.complains = 0
-      this.complains1 = 0
-      this.complains2 = 0
+      this.complains = 0;
+      this.complains1 = 0;
+      this.complains2 = 0;
     },
 
     tsInput() {
-      var _txtVal = this.comment1.length
-      this.remnant1 = _txtVal
+      var _txtVal = this.comment1.length;
+      this.remnant1 = _txtVal;
     },
     checkedNames1(id) {
-      this.checkedNames = id
+      this.checkedNames = id;
     },
 
     // 视频投诉
-    submitTs(id, type, rule) {
-      var checkedNames = this.checkedNames
-      var comment = this.comment1
-      this._report(id, type, comment, checkedNames)
+    submitTs(id, type) {
+      var checkedNames = this.checkedNames;
+      var comment = this.comment1;
+      this._report(id, type, comment, checkedNames);
     },
 
     // 评论投诉
     submitTs1(type) {
-      var id = this.plId
-      var checkedNames = this.checkedNames
-      var comment = this.comment1
-      this._report(id, type, comment, checkedNames)
+      var id = this.plId;
+      var checkedNames = this.checkedNames;
+      var comment = this.comment1;
+      this._report(id, type, comment, checkedNames);
     },
 
     // 回复投诉
     submitTs2(type) {
-      var id = this.hfId
-      var checkedNames = this.checkedNames
-      var comment = this.comment1
-      this._report(id, type, comment, checkedNames)
+      var id = this.hfId;
+      var checkedNames = this.checkedNames;
+      var comment = this.comment1;
+      this._report(id, type, comment, checkedNames);
     },
 
     // 投诉举报
     async _report(id, type, comment, checkedNames) {
-      const res = await report(id, type, comment, checkedNames)
-      if (res.code === '1') {
-        this.jbcgId = true
-        this.complains = 0
-        this.complains1 = 0
-        this.complains2 = 0
+      const res = await report(id, type, comment, checkedNames);
+      if (res.code === "1") {
+        this.jbcgId = true;
+        this.complains = 0;
+        this.complains1 = 0;
+        this.complains2 = 0;
         setTimeout(() => {
-          this.jbcgId = false
-        }, 2000)
-      } else if (res.code === '2') {
-        this.cfjbId = true
-        this.complains = 0
-        this.complains1 = 0
-        this.complains2 = 0
+          this.jbcgId = false;
+        }, 2000);
+      } else if (res.code === "2") {
+        this.cfjbId = true;
+        this.complains = 0;
+        this.complains1 = 0;
+        this.complains2 = 0;
         setTimeout(() => {
-          this.cfjbId = false
-        }, 2000)
+          this.cfjbId = false;
+        }, 2000);
       }
     },
 
     // 举报类型
     async _reportRules() {
-      const res = await reportRules()
-      this.rules = res.data
+      const res = await reportRules();
+      this.rules = res.data;
     },
 
     toMine(id) {
-      var userId = Cookies.get('userId')
+      var userId = Cookies.get("userId");
       if (id == userId) {
-        this.$router.push(`/personalCenter?userId=${id}&type=message`)
+        this.$router.push(`/personalCenter?userId=${id}&type=message`);
       } else {
-        this.$router.push(`/perHome?userId=${id}&type=message`)
+        this.$router.push(`/perHome?userId=${id}&type=message`);
       }
     },
     // 关注自己 关闭按钮
     cancelf() {
-      this.dontId = false
+      this.dontId = false;
     },
     loveVideo() {
-      this._likeVideo(this.videoId)
+      this._likeVideo(this.videoId);
     },
     cancellove() {
-      this._cancelLikeVideo(this.videoId)
+      this._cancelLikeVideo(this.videoId);
     },
     collect() {
-      this._collectVideo(this.videoId)
+      this._collectVideo(this.videoId);
     },
     cancelcollect() {
-      this._cancelCollectVideo(this.videoId)
+      this._cancelCollectVideo(this.videoId);
     },
     // 关注列表用户说
     fUser(id) {
-      this._followUser(id)
+      this._followUser(id);
     },
     // 取消关注列表用户说
     cancelfUser(id) {
-      this._cancelFollow(id)
+      this._cancelFollow(id);
     },
 
     // 确定回复
     sureReply(id) {
-      var replyId = ''
-      var replyContent = this.replyContent
-      this._addReply(id, replyId, replyContent)
+      var replyId = "";
+      var replyContent = this.replyContent;
+      this._addReply(id, replyId, replyContent);
     },
 
     // 二级确定回复
     sureSecondReply(id, replyId, replySecondContent) {
-      this._addReply(id, replyId, replySecondContent)
+      this._addReply(id, replyId, replySecondContent);
     },
 
     //  视频详情
     async _vedioInfo(id) {
-      const res = await vedioInfo(id)
+      const res = await vedioInfo(id);
 
-      this.avatar = Cookies.get('avatar')
+      this.avatar = Cookies.get("avatar");
 
-      this.list = res.data || { video_src: '' }
+      this.list = res.data || { video_src: "" };
       this.playerOptions.sources = [
         {
-          type: 'video/mp4',
+          type: "video/mp4",
           src: res.data.video_src
         }
-      ]
+      ];
       // this.$refs.video.src = res.data.video_src || "";
-      this.followId = res.data.isFollow
-      this.userId = res.data.user_id
-      this.isLike = res.data.is_like
-      this.isCollect = res.data.is_collect
-      this.videoName = res.data.name
-      this.introduce = res.data.describe
+      this.followId = res.data.isFollow;
+      this.userId = res.data.user_id;
+      this.isLike = res.data.is_like;
+      this.isCollect = res.data.is_collect;
+      this.videoName = res.data.name;
+      this.introduce = res.data.describe;
     },
 
     //  关注用户
     async _followUser(id) {
-      const res = await followUser(id)
-      if (res.code === '1') {
-        this.followId = 1
-        this._getCommentList()
-      } else if (res.code === '-1') {
+      const res = await followUser(id);
+      if (res.code === "1") {
+        this.followId = 1;
+        this._getCommentList();
+      } else if (res.code === "-1") {
         this.$router.push({
-          path: '/login'
-        })
-      } else if (res.code === '12') {
-        this.dontId = true
+          path: "/login"
+        });
+      } else if (res.code === "12") {
+        this.dontId = true;
       }
     },
 
     //  取消关注
     async _cancelFollow(id) {
-      const res = await cancelFollow(id)
-      if (res.code === '1') {
-        this.followId = 0
-        this._getCommentList()
+      const res = await cancelFollow(id);
+      if (res.code === "1") {
+        this.followId = 0;
+        this._getCommentList();
       }
     },
 
     // 添加评论
     async _addVideoComment() {
-      const res = await addVideoComment(this.list.id, this.comment)
-      this._getCommentList(this.videoId)
-      if (res.code === '-1') {
+      const res = await addVideoComment(this.list.id, this.comment);
+      this._getCommentList(this.videoId);
+      if (res.code === "-1") {
         this.$router.push({
-          path: '/login'
-        })
+          path: "/login"
+        });
       }
     },
 
     // 回复
     async _addReply(id, replyId, replyContent) {
-      const res = await addReply(id, replyId, replyContent)
-      if (res.code === '1') {
-        this._getCommentList()
+      const res = await addReply(id, replyId, replyContent);
+      if (res.code === "1") {
+        this._getCommentList();
       }
     },
 
     // 获取评论列表
     async _getCommentList(limit, page) {
-      const res = await commentList(limit, page, this.videoId)
-      this.videoCommentList = res.data
-      this.total = res.count
-      this.allTotal = res.totalpage
+      const res = await commentList(limit, page, this.videoId);
+      this.videoCommentList = res.data;
+      this.total = res.count;
+      this.allTotal = res.totalpage;
     },
 
     // 分页
     handleCurrentChange(currentPage) {
-      const params = this.$route.query
+      const params = this.$route.query;
       const newParams = Object.assign({}, params, {
         page: currentPage
-      })
+      });
       this.$router.push({
-        path: '/play',
+        path: "/play",
         query: newParams
-      })
-      var limit = 12
-      var page = this.currentPage
-      this._getCommentList(limit, page)
+      });
+      var limit = 12;
+      var page = this.currentPage;
+      this._getCommentList(limit, page);
     },
 
     // 点赞视频
     async _likeVideo() {
-      const res = await likeVideo(this.videoId)
-      if (res.code === '1') {
-        this._vedioInfo(this.videoId)
-      } else if (res.code === '-1') {
+      const res = await likeVideo(this.videoId);
+      if (res.code === "1") {
+        this._vedioInfo(this.videoId);
+      } else if (res.code === "-1") {
         this.$router.push({
-          path: '/login'
-        })
+          path: "/login"
+        });
       }
     },
 
     // 取消点赞视频
     async _cancelLikeVideo() {
-      const res = await cancelLikeVideo(this.videoId)
-      if (res.code === '1') {
-        this._vedioInfo(this.videoId)
+      const res = await cancelLikeVideo(this.videoId);
+      if (res.code === "1") {
+        this._vedioInfo(this.videoId);
       }
     },
 
     // 收藏视频
     async _collectVideo() {
-      const res = await collectVideo(this.videoId)
-      if (res.code === '1') {
-        this._vedioInfo(this.videoId)
-      } else if (res.code === '-1') {
+      const res = await collectVideo(this.videoId);
+      if (res.code === "1") {
+        this._vedioInfo(this.videoId);
+      } else if (res.code === "-1") {
         this.$router.push({
-          path: '/login'
-        })
+          path: "/login"
+        });
       }
     },
 
     // 取消收藏视频
     async _cancelCollectVideo() {
-      const res = await cancelCollectVideo(this.videoId)
-      if (res.code === '1') {
-        this._vedioInfo(this.videoId)
+      const res = await cancelCollectVideo(this.videoId);
+      if (res.code === "1") {
+        this._vedioInfo(this.videoId);
       }
     },
     onPlayerPlay() {},
     onPlayerPause() {},
     follow() {
-      this._followUser(this.userId)
+      this._followUser(this.userId);
     },
     following() {
-      this._cancelFollow(this.userId)
+      this._cancelFollow(this.userId);
     },
 
     times(t) {
-      let sec = parseInt(t) % 60
-      let minute = parseInt(t / 60) % 60
-      let hour = parseInt(t / 360) % 24
+      let sec = parseInt(t) % 60;
+      let minute = parseInt(t / 60) % 60;
+      let hour = parseInt(t / 360) % 24;
       if (sec < 10) {
-        sec = '0' + sec
+        sec = "0" + sec;
       }
       if (minute < 10) {
-        minute = '0' + minute
+        minute = "0" + minute;
       }
       if (hour < 10) {
-        hour = '0' + hour
+        hour = "0" + hour;
       }
       if (hour > 0) {
-        return (t = hour + ':' + minute + ':' + sec)
+        return (t = hour + ":" + minute + ":" + sec);
       } else if (minute > 0) {
-        return (t = minute + ':' + sec)
+        return (t = minute + ":" + sec);
       } else {
-        return (t = '00:' + sec)
+        return (t = "00:" + sec);
       }
     },
     staPlay() {
       if (this.startPlay) {
-        this.startPlay = !this.startPlay
-        this.$refs.video.play()
+        this.startPlay = !this.startPlay;
+        this.$refs.video.play();
         // this.interval = setInterval(() => {
         //   let cont = this.$refs.video.duration;
         //   let now = this.$refs.video.currentTime;
@@ -1067,39 +1030,39 @@ export default {
         //   console.log("视频总时长", cont, now, now / cont);
         // }, 1000);
       } else {
-        this.startPlay = !this.startPlay
-        this.$refs.video.pause()
+        this.startPlay = !this.startPlay;
+        this.$refs.video.pause();
         // console.log(22222, this.$refs.video.currentTime);
-        clearInterval(this.interval)
+        clearInterval(this.interval);
       }
     },
     // 720p
     ProgsFn() {
-      this.Progs = !this.Progs
+      this.Progs = !this.Progs;
     },
     // 全屏
     full() {
-      this.$refs.video.webkitRequestFullScreen()
+      this.$refs.video.webkitRequestFullScreen();
     },
     // 点击拖拽圆点
     drags() {
-      this.move = 1
+      this.move = 1;
     },
     // 鼠标移动事件
     drag(e) {
       if (this.move == 1) {
-        console.log('100', e)
+        console.log("100", e);
 
-        let width = this.$refs.progress.offsetWidth //div 的宽度
-        let left = e.layerX // 鼠标相对div的距离
-        console.log('ydydydydyddyyd', width, left, e, this.$refs.progress)
+        let width = this.$refs.progress.offsetWidth; //div 的宽度
+        let left = e.layerX; // 鼠标相对div的距离
+        console.log("ydydydydyddyyd", width, left, e, this.$refs.progress);
       } else {
-        return false
+        return false;
       }
     },
     // 取消鼠标移动事件
     clearMove() {
-      this.move = 2
+      this.move = 2;
     },
     // 点击到对应的时间点
     tiemClick() {
@@ -1116,9 +1079,9 @@ export default {
     // 鼠标悬浮
     block(n) {
       if (n == 1) {
-        this.blocks = 'inline-block'
+        this.blocks = "inline-block";
       } else {
-        this.blocks = 'none'
+        this.blocks = "none";
       }
     }
   },
@@ -1130,7 +1093,7 @@ export default {
     videoPlayer,
     videoComment
   }
-}
+};
 </script>
 <style lang="less" scoped>
 .jbcg {
