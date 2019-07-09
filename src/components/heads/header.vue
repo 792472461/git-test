@@ -50,6 +50,7 @@
 <script>
 import { homePage, classList, getRandomKey } from "@/api/home.js";
 import { mapState, mapActions, mapMutations } from "vuex";
+import Cookies from "js-cookie";
 export default {
   data() {
     return {
@@ -187,12 +188,22 @@ export default {
       }
     },
     login() {
-      this.$router.push({
-        path: "/personalCenter",
-        query: {
-          type: "message"
-        }
-      });
+      const token = Cookies.get("tokenAccess");
+      if (token) {
+        this.$router.push({
+          path: "/personalCenter",
+          query: {
+            type: "message"
+          }
+        });
+      } else {
+        this.$router.push({
+          path: "/login",
+          query: {
+            name: "login"
+          }
+        });
+      }
     }
   }
 };

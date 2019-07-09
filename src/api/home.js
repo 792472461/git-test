@@ -393,6 +393,34 @@ function deleteVideo(videoId) {
   return axios.post("/api/user/deleteVideo", data);
 }
 
+//  上传图片
+function uploadImg(data) {
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  };
+  return axios.post("/api/index/uploadImg", data, config);
+}
+
+//  立即认证（身份证）
+function userVerify(
+  realname,
+  papersType,
+  papersNumber,
+  papersImg,
+  papersBackimg
+) {
+  let data = {
+    realname: realname,
+    papers_type: papersType,
+    papers_number: papersNumber,
+    papers_img: papersImg,
+    papers_back_img: papersBackimg
+  };
+  return axios.post("/api/user/userVerify", data);
+}
+
 //  视频发布
 function addVideo(
   name,
@@ -455,6 +483,19 @@ function accounStatus() {
   return axios.post("/api/user/accounStatus");
 }
 
+// 实名认证状态
+function verifyStatus() {
+  return axios.post("/api/user/verifyStatus");
+}
+
+// 编辑视频详情
+function videoInfo(videoId) {
+  let data = {
+    video_id: videoId
+  };
+  return axios.post("/api/user/videoInfo", data);
+}
+
 export {
   login,
   checkNickname,
@@ -508,5 +549,9 @@ export {
   addLabel,
   deleteVideo,
   bindEmail,
-  accounStatus
+  accounStatus,
+  uploadImg,
+  userVerify,
+  verifyStatus,
+  videoInfo
 };

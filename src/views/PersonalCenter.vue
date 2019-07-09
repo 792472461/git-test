@@ -12,28 +12,16 @@
             <div class="titleImg">
               <div>
                 <div class="txImg">
-                  <img
-                    class="titimg"
-                    :src="info.avatar"
-                  />
+                  <img class="titimg" :src="info.avatar" />
                 </div>
-                <img
-                  class="Vadd"
-                  src="@/assets/images/home/Vadd.png"
-                />
+                <img class="Vadd" src="@/assets/images/home/Vadd.png" />
               </div>
               <div class="my">
-                <div
-                  class="mys"
-                  @click="$router.push(`/follow`)"
-                >
+                <div class="mys" @click="$router.push(`/follow`)">
                   <span>我的关注</span>
                   <span>{{ info.followCount }}</span>
                 </div>
-                <div
-                  class="mys"
-                  @click="$router.push(`/myFans`)"
-                >
+                <div class="mys" @click="$router.push(`/myFans`)">
                   <span>我的粉丝</span>
                   <span>{{ info.fansCount }}</span>
                 </div>
@@ -64,10 +52,7 @@
               </p>
               <p class="lazy">{{ info.score }}</p>
             </div>
-            <div
-              class="editPro"
-              @click="editPro()"
-            >
+            <div class="editPro" @click="editPro()">
               <span>编辑个人资料</span>
             </div>
           </div>
@@ -113,27 +98,19 @@
       <div v-show="index == 'myVideo'">
         <div class="myVideo">
           <div class="drafts">
-            <div
-              class="uploadV"
-              @click="$router.push(`/uploadVideo`)"
-            >
+            <div class="uploadV" @click="$router.push(`/uploadVideo`)">
               上传视频
             </div>
-            <div
-              @click="cgx()"
-              class="dra"
-            >草稿箱</div>
+            <div @click="cgx()" class="dra">草稿箱</div>
           </div>
           <div class="lis">
             <ul>
-              <li
-                v-for="item in myVideoList"
-                :key="item.id"
-              >
+              <li v-for="item in myVideoList" :key="item.id">
                 <span
                   class="headImg"
                   @click="$router.push(`/play?videoId=${item.id}`)"
-                ><img :src="item.cover_img" /><i>{{ item.length }}</i></span>
+                  ><img :src="item.cover_img" /><i>{{ item.length }}</i></span
+                >
                 <div class="cont">
                   <p
                     class="h"
@@ -147,7 +124,8 @@
                       class="labels"
                       v-for="(_item, index) in item.video_label"
                       :key="index"
-                    >{{ _item }}</span>
+                      >{{ _item }}</span
+                    >
                   </p>
                 </div>
                 <div class="edit">
@@ -160,17 +138,13 @@
               </li>
             </ul>
           </div>
-          <div
-            class="nohave"
-            v-show="0"
-          >
+          <div class="nohave" v-show="0">
             <img src="@/assets/images/home/nohave.png" />
-            <span class="noupload">还没有上传过视频哦，<i>立即上传 &gt;</i></span>
+            <span class="noupload"
+              >还没有上传过视频哦，<i>立即上传 &gt;</i></span
+            >
           </div>
-          <div
-            class="fy"
-            v-show="allTotal2 > 1"
-          >
+          <div class="fy" v-show="allTotal2 > 1">
             <el-pagination
               background
               layout="prev, pager, next"
@@ -184,23 +158,13 @@
         </div>
       </div>
       <!-- 我的收藏 -->
-      <div
-        class="top12"
-        v-show="index == 'myCollection'"
-      >
+      <div class="top12" v-show="index == 'myCollection'">
         <div class="collect">
           <span class="title">收藏的视频</span>
         </div>
         <div class="col-video">
-          <div
-            class="col-videos"
-            v-for="(item, index) in list"
-            :key="index"
-          >
-            <p
-              class="imgh"
-              @click="$router.push(`/play?videoId=${item.id}`)"
-            >
+          <div class="col-videos" v-for="(item, index) in list" :key="index">
+            <p class="imgh" @click="$router.push(`/play?videoId=${item.id}`)">
               <img :src="item.cover_img" />
             </p>
             <p class="welcome">{{ item.name }}</p>
@@ -210,10 +174,7 @@
             </p>
           </div>
         </div>
-        <div
-          class="fy"
-          v-show="allTotal > 1"
-        >
+        <div class="fy" v-show="allTotal > 1">
           <el-pagination
             background
             layout="prev, pager, next"
@@ -226,10 +187,7 @@
         </div>
       </div>
       <!-- 浏览记录 -->
-      <div
-        class="top12"
-        v-show="index == 'browsingHistory'"
-      >
+      <div class="top12" v-show="index == 'browsingHistory'">
         <div class="collect">
           <span class="title">浏览历史</span>
           <p class="clearhistory">
@@ -245,26 +203,17 @@
             v-for="(item, index) in historyList"
             :key="index"
           >
-            <p
-              class="imgh"
-              @click="$router.push(`/play?videoId=${item.id}`)"
-            >
+            <p class="imgh" @click="$router.push(`/play?videoId=${item.id}`)">
               <img :src="item.cover_img" />
             </p>
             <p class="welcome">{{ item.name }}</p>
             <p class="cole">
               看到：16:00
-              <img
-                @click="scls(item.id)"
-                src="~@/assets/images/home/ljt.png"
-              />
+              <img @click="scls(item.id)" src="~@/assets/images/home/ljt.png" />
             </p>
           </div>
         </div>
-        <div
-          class="fy"
-          v-show="allTotal1 > 1"
-        >
+        <div class="fy" v-show="allTotal1 > 1">
           <el-pagination
             background
             layout="prev, pager, next"
@@ -277,44 +226,44 @@
         </div>
       </div>
       <!-- 金币管理 -->
-      <div
-        class="top12"
-        v-show="index == 'gold'"
-      >
+      <div class="top12" v-show="index == 'gold'">
         <div class="zwkt">暂未开通金币管理，敬请等待...</div>
       </div>
       <!-- 草稿箱 -->
       <div v-show="index == 6">
         <div class="myVideo">
           <div class="drafts">
-            <img
-              @click="back()"
-              src="@/assets/images/home/drafts-lt.png"
-            />
+            <img @click="back()" src="@/assets/images/home/drafts-lt.png" />
             <span class="cgx">草稿箱</span>
           </div>
           <div class="lis">
             <ul>
-              <li
-                v-for="(item, index) in cgxList"
-                :key="index"
-              >
-                <span class="headImg"><img
+              <li v-for="(item, index) in cgxList" :key="index">
+                <span class="headImg"
+                  ><img
                     :src="item.cover_img"
                     @click="$router.push(`/play?videoId=${item.id}`)"
-                  /><i>{{item.length}}</i></span>
+                  /><i>{{ item.length }}</i></span
+                >
                 <div class="cont">
                   <p class="h">{{ item.name }}</p>
                   <!-- <p class="dirct">废材个阻止妹恋爱</p> -->
-                  <p class="uptime">上传时间：{{item.create_time}}</p>
-                  <p class="label"><span
+                  <p class="uptime">上传时间：{{ item.create_time }}</p>
+                  <p class="label">
+                    <span
                       v-for="(_item, index) in item.video_label"
                       :key="index"
                       class="labels"
-                    >{{_item}}</span></p>
+                      >{{ _item }}</span
+                    >
+                  </p>
                 </div>
                 <div class="edit">
-                  <span class="btn">编辑视频</span>
+                  <span
+                    class="btn"
+                    @click="$router.push(`/uploadVideo?videoId=${item.id}`)"
+                    >编辑视频</span
+                  >
                   <img
                     class="delt"
                     src="@/assets/images/home/deltaVideo.png"
@@ -324,10 +273,7 @@
               </li>
             </ul>
           </div>
-          <div
-            class="fy"
-            v-show="allTotal2 > 1"
-          >
+          <div class="fy" v-show="allTotal2 > 1">
             <el-pagination
               background
               layout="prev, pager, next"
@@ -356,16 +302,16 @@ import {
   deleteHistory,
   clearHistory,
   deleteVideo
-} from '../api/home.js'
-import Barnar from '../components/barnar/barnar.vue'
+} from "../api/home.js";
+import Barnar from "../components/barnar/barnar.vue";
 export default {
   data() {
     return {
       cgxList: [],
       myVideoList: [],
-      allTotal2: '',
-      allTotal1: '',
-      allTotal: '',
+      allTotal2: "",
+      allTotal1: "",
+      allTotal: "",
       total: 0,
       total1: 0,
       total2: 0,
@@ -373,213 +319,213 @@ export default {
       list: [],
       info: {},
       index: this.$route.query.type
-    }
+    };
   },
   computed: {
     Id() {
-      return this.$route.query.id
+      return this.$route.query.id;
     },
     currentPage() {
-      return this.$route.query.page || 1
+      return this.$route.query.page || 1;
     }
   },
 
   created() {
-    var limit = 24
-    var _limit = 10
-    var page = this.currentPage
-    this._videoHistory(limit, page)
-    this._userInfo()
-    this._myCollectionVideo(limit, page)
-    this._myVideo(_limit, page, 0)
+    var limit = 24;
+    var _limit = 10;
+    var page = this.currentPage;
+    this._videoHistory(limit, page);
+    this._userInfo();
+    this._myCollectionVideo(limit, page);
+    this._myVideo(_limit, page, 0);
   },
   methods: {
     myDel(videoId) {
-      this._deleteVideo(videoId, 0)
+      this._deleteVideo(videoId, 0);
     },
 
     // 草稿箱
     cgx() {
-      this.index = 6
-      var _limit = 10
-      var page = this.currentPage
-      this._myVideo(_limit, page, 1)
+      this.index = 6;
+      var _limit = 10;
+      var page = this.currentPage;
+      this._myVideo(_limit, page, 1);
     },
 
     qxsc(id) {
-      this._cancelCollectVideo(id)
+      this._cancelCollectVideo(id);
     },
 
     cgxDel(index) {
-      this._deleteVideo(index, 1)
+      this._deleteVideo(index, 1);
     },
 
     // 清空历史
     async _clearHistory() {
-      const res = await clearHistory()
-      if (res.code === '1') {
-        var limit = 24
-        var page = this.currentPage
-        this._videoHistory(limit, page)
+      const res = await clearHistory();
+      if (res.code === "1") {
+        var limit = 24;
+        var page = this.currentPage;
+        this._videoHistory(limit, page);
       }
     },
 
     empty() {
-      this._clearHistory()
+      this._clearHistory();
     },
 
     // 删除历史
     async _deleteHistory(historyId) {
-      const res = await deleteHistory(historyId)
-      if (res.code === '1') {
-        var limit = 24
-        var page = this.currentPage
-        this._videoHistory(limit, page)
+      const res = await deleteHistory(historyId);
+      if (res.code === "1") {
+        var limit = 24;
+        var page = this.currentPage;
+        this._videoHistory(limit, page);
       }
     },
 
     scls(historyId) {
-      this._deleteHistory(historyId)
+      this._deleteHistory(historyId);
     },
 
     // 我的视频接口
     async _myVideo(limit, page, isdrafts) {
-      const res = await myVideo(limit, page, isdrafts)
+      const res = await myVideo(limit, page, isdrafts);
 
-      this.total = res.count
-      this.allTotal2 = res.totalpage
+      this.total = res.count;
+      this.allTotal2 = res.totalpage;
       if (isdrafts == 0) {
-        this.myVideoList = res.data
+        this.myVideoList = res.data;
       } else if (isdrafts == 1) {
-        this.cgxList = res.data
+        this.cgxList = res.data;
       }
-      console.log(this.cgxList, 'ppp')
+      console.log(this.cgxList, "ppp");
     },
 
     // 删除我的视频
     async _deleteVideo(videoId, name) {
-      const res = await deleteVideo(videoId)
-      if (res.code == '1' && name == 0) {
-        var _limit = 10
-        var page = this.currentPage
-        this._myVideo(_limit, page, 0)
-      } else if (res.code == '1' && name == 1) {
-        this.index = 6
-        var _limit = 10
-        var page = this.currentPage
-        this._myVideo(_limit, page, 1)
+      const res = await deleteVideo(videoId);
+      if (res.code == "1" && name == 0) {
+        var _limit = 10;
+        var page = this.currentPage;
+        this._myVideo(_limit, page, 0);
+      } else if (res.code == "1" && name == 1) {
+        this.index = 6;
+        var _limit = 10;
+        var page = this.currentPage;
+        this._myVideo(_limit, page, 1);
       }
     },
 
     //  历史记录接口
     async _videoHistory(limit, page) {
-      const res = await videoHistory(limit, page)
-      this.historyList = res.data
-      this.total2 = res.count
-      this.allTotal1 = res.totalpage
+      const res = await videoHistory(limit, page);
+      this.historyList = res.data;
+      this.total2 = res.count;
+      this.allTotal1 = res.totalpage;
     },
 
     // 浏览记录
     handleCurrentChange(currentPage) {
-      const params = this.$route.query
+      const params = this.$route.query;
       const newParams = Object.assign({}, params, {
         page: currentPage
-      })
+      });
       this.$router.push({
-        path: '/personalCenter',
+        path: "/personalCenter",
         query: newParams
-      })
-      var limit = 24
-      var page = this.currentPage
-      this._videoHistory(limit, page)
+      });
+      var limit = 24;
+      var page = this.currentPage;
+      this._videoHistory(limit, page);
     },
 
     // 收藏
     handleCurrentChange1(currentPage) {
-      const params = this.$route.query
+      const params = this.$route.query;
       const newParams = Object.assign({}, params, {
         page: currentPage
-      })
+      });
       this.$router.push({
-        path: '/personalCenter',
+        path: "/personalCenter",
         query: newParams
-      })
-      var limit = 24
-      var page = this.currentPage
-      this._myCollectionVideo(limit, page)
+      });
+      var limit = 24;
+      var page = this.currentPage;
+      this._myCollectionVideo(limit, page);
     },
 
     // 我的视频
     handleCurrentChange3(currentPage) {
-      const params = this.$route.query
+      const params = this.$route.query;
       const newParams = Object.assign({}, params, {
         page: currentPage
-      })
+      });
       this.$router.push({
-        path: '/personalCenter',
+        path: "/personalCenter",
         query: newParams
-      })
-      var limit = 10
-      var page = this.currentPage
-      this._myVideo(limit, page)
+      });
+      var limit = 10;
+      var page = this.currentPage;
+      this._myVideo(limit, page);
     },
 
     async _userInfo() {
-      const res = await userInfo(this.Id)
-      this.info = res.data
+      const res = await userInfo(this.Id);
+      this.info = res.data;
     },
 
     // 我的收藏接口
     async _myCollectionVideo(limit, page) {
-      const res = await myCollectionVideo(limit, page)
-      this.list = res.data
-      this.total1 = res.count
-      this.allTotal = res.totalpage
+      const res = await myCollectionVideo(limit, page);
+      this.list = res.data;
+      this.total1 = res.count;
+      this.allTotal = res.totalpage;
     },
 
     async _cancelCollectVideo(id) {
-      const res = await cancelCollectVideo(id)
-      this.list = res.data
-      if (res.code == '1') {
-        var limit = 24
-        var page = this.currentPage
-        this._myCollectionVideo(limit, page)
+      const res = await cancelCollectVideo(id);
+      this.list = res.data;
+      if (res.code == "1") {
+        var limit = 24;
+        var page = this.currentPage;
+        this._myCollectionVideo(limit, page);
       }
     },
 
     search() {
       this.$router.push({
-        path: '/search',
+        path: "/search",
         query: {
           name: 11111
         }
-      })
+      });
     },
 
     editPro() {
       this.$router.push({
-        path: '/editData',
+        path: "/editData",
         query: {
-          type: 'accountSetting'
+          type: "accountSetting"
         }
-      })
+      });
     },
 
     listcheck(data) {
-      this.index = data
+      this.index = data;
     },
 
     back() {
-      this.index = 'myVideo'
-      var _limit = 10
-      var page = this.currentPage
-      this._myVideo(_limit, page, 0)
+      this.index = "myVideo";
+      var _limit = 10;
+      var page = this.currentPage;
+      this._myVideo(_limit, page, 0);
     }
   },
   components: {
     Barnar
   }
-}
+};
 </script>
 <style lang="less" scoped>
 /deep/ .el-pagination.is-background .el-pager li:not(.disabled).active {

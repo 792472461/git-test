@@ -16,19 +16,14 @@
           <div class="second">
             <label for="sex">证件类型：</label>
             <select class="card" id="card" v-model="chooseList">
-              <option value="sfzCard">身份证</option>
-              <option value="hzCard">护照</option>
-              <option value="gaCard">港澳居民前往内地通行证</option>
-              <option value="twCard">台湾居民前往内地通行证</option>
+              <option value="1">身份证</option>
+              <option value="2">护照</option>
+              <option value="3">港澳居民前往内地通行证</option>
+              <option value="4">台湾居民前往内地通行证</option>
             </select>
           </div>
           <div class="third">
             <span>证件号码：</span>
-            <!-- <input
-              type="text"
-              maxlength="3"
-              onkeyup="if(isNaN(value))execCommand('undo')"
-            /> -->
             <input
               type="text"
               class="form-control match-rotation-input"
@@ -36,40 +31,44 @@
               onblur="value=value.replace(/[^\d]/g,'')"
               ng-model="schedule.round"
               placeholder="请输入您的证件号码"
+              v-model="identityNUM"
             />
           </div>
         </div>
         <div class="card_img">
           <ul>
             <li class="left">
-              <img src="@/assets/images/home/card_z.png" />
-              <el-upload
-                class="avatar-uploader"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload"
-              >
-                <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
+              <img :src="avatar" />
               <span>上传证件正面照2M</span>
-              <p>点击上传</p>
+              <a href="javascript:;" class="file">
+                点击上传
+                <input
+                  type="file"
+                  name="avatar"
+                  id="uppic"
+                  accept="image/gif,image/jpeg,image/jpg,image/png"
+                  @change="changeImage($event)"
+                  ref="avatarInput"
+                  class="uppic"
+                />
+              </a>
             </li>
+
             <li class="left">
-              <img src="@/assets/images/home/card_b.png" />
-              <el-upload
-                class="avatar-uploader"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload"
-              >
-                <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
+              <img :src="avatarBack" />
               <span>上传证件正面照2M</span>
-              <p>点击上传</p>
+              <a href="javascript:;" class="file">
+                点击上传
+                <input
+                  type="file"
+                  name="avatar"
+                  id="uppic"
+                  accept="image/gif,image/jpeg,image/jpg,image/png"
+                  @change="changeImageBack($event)"
+                  ref="avatarInput"
+                  class="uppic"
+                />
+              </a>
             </li>
           </ul>
           <div class="ljrz" @click="attestation()">立即认证</div>
@@ -77,50 +76,120 @@
       </div>
       <div class="mask" v-show="curId"></div>
     </div>
-    <footer>
+    <footer class="footer">
       暂无页脚
     </footer>
   </div>
 </template>
 <script>
+import { uploadImg, userVerify } from "../api/home.js";
+import Cookies from "js-cookie";
 export default {
   data() {
     return {
+      identityNUM: "",
+      frontImg: "",
+      backImg: "",
       chooseList: "",
       name: "",
       imageUrl: "",
-      curId: false
+      curId: false,
+      avatar: require("../assets/images/home/card_z.png"),
+      avatarBack: require("../assets/images/home/card_b.png")
     };
   },
   methods: {
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+    //  上传图片
+    async _uploadImg(formData, type) {
+      const res = await uploadImg(formData);
+      if (type === "front" && res.code === "1") {
+        this.frontImg = res.data.imgPath;
+        console.log(this.frontImg, "99");
+      } else if (type === "back" && res.code === "1") {
+        this.backImg = res.data.imgPath;
+      }
     },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
 
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
+    changeImage(e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+      var that = this;
+
+      var formData = new FormData();
+      formData.append("file", file);
+      this._uploadImg(formData, "front");
+
+      reader.readAsDataURL(file);
+      reader.onload = function(e) {
+        that.avatar = this.result;
+      };
+    },
+
+    changeImageBack(e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+      var that = this;
+
+      var formData = new FormData();
+      formData.append("file", file);
+      this._uploadImg(formData, "back");
+
+      reader.readAsDataURL(file);
+      reader.onload = function(e) {
+        that.avatarBack = this.result;
+      };
+    },
+
+    //  立即认证
+    async _userVerify(
+      realname,
+      papersType,
+      papersNumber,
+      papersImg,
+      papersBackimg
+    ) {
+      const res = await userVerify(
+        realname,
+        papersType,
+        papersNumber,
+        papersImg,
+        papersBackimg
+      );
+      if (res.code === "1") {
+        Cookies.set("typeId", "true");
+        this.$router.push({
+          path: "/submission",
+          query: {
+            type: "success"
+          }
+        });
+      } else if (res.code === "2") {
+        alert("请不要重复提交");
       }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
-      }
-      return isJPG && isLt2M;
+    },
+
+    attestation() {
+      var realname = this.name;
+      var papersType = this.chooseList;
+      var papersNumber = this.identityNUM;
+      var papersImg = this.frontImg;
+      var papersBackimg = this.backImg;
+      this._userVerify(
+        realname,
+        papersType,
+        papersNumber,
+        papersImg,
+        papersBackimg
+      );
+      // var r = confirm('您确定要提交审核吗')
+      // if (r == true) {
+      //   console.log('跳转下一页')
+      //   this.curId = false
+      // } else {
+      //   this.curId = false
+      //   return
+      // }
     }
-  },
-
-  attestation() {
-    console.log(1111);
-    this.curId = true;
-    // var r = confirm('您确定要提交审核吗')
-    // if (r == true) {
-    //   console.log('跳转下一页')
-    //   this.curId = false
-    // } else {
-    //   this.curId = false
-    //   return
-    // }
   }
 };
 </script>
@@ -156,7 +225,7 @@ export default {
   .inner {
     width: 1200px;
     margin: 0 auto;
-    margin-bottom: 70px;
+    margin-bottom: 570px;
     .smyz {
       height: 70px;
       line-height: 70px;
@@ -203,20 +272,51 @@ export default {
       }
     }
     .card_img {
+      position: relative;
       ul {
+        position: absolute;
         display: flex;
-        width: 443px;
-        margin: 0 auto;
+        left: 50%;
+        transform: translateX(-50%);
         li {
           img {
             display: block;
-            width: 220px;
-            height: 140px;
+            width: 250px;
+            height: 160px;
           }
         }
         .left {
           margin-left: 17px;
           margin-right: 30px;
+          .file {
+            position: relative;
+            display: inline-block;
+            background: #ffaad7;
+            border: 1px solid #eb78b4;
+            border-radius: 4px;
+            padding: 10px 30px;
+            overflow: hidden;
+            color: #fff;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+            margin-top: 35px;
+          }
+          .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+          }
+          .file:hover {
+            background: #fb91d5;
+            border-color: #f198d1;
+            color: #fff;
+            text-decoration: none;
+          }
+
           span {
             display: block;
             color: #606060;
@@ -234,7 +334,9 @@ export default {
         }
       }
       .ljrz {
-        margin-top: 100px;
+        position: absolute;
+        top: 400px;
+        transform: translateX(-50%);
         width: 120px;
         height: 40px;
         background-color: #ff4a9c;
@@ -242,6 +344,7 @@ export default {
         color: #fff;
         border-radius: 3px;
         margin-left: 580px;
+        cursor: pointer;
       }
     }
   }
@@ -251,7 +354,7 @@ export default {
     bottom: 0px;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
+    // background: rgba(0, 0, 0, 0.4);
   }
 }
 </style>

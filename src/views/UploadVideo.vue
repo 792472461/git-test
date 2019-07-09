@@ -1,8 +1,9 @@
 <template>
   <div class="uoloadV">
     <Header></Header>
-    <div class="submitSuc">
-      <p>x</p>提交成功
+    <div v-show="cur" class="submitSuc">
+      <p @click="closeSuc">x</p>
+      提交成功
     </div>
     <div class="content">
       <div class="tit">上传视频</div>
@@ -18,15 +19,8 @@
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
           >
-            <img
-              v-if="imageUrl"
-              :src="imageUrl"
-              class="avatar"
-            >
-            <i
-              v-else
-              class="el-icon-plus avatar-uploader-icon"
-            ></i>
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </div>
         <!-- 上传视频 -->
@@ -47,7 +41,6 @@
             <uploader-list></uploader-list>
           </uploader>
         </div>
-
       </div>
       <!-- <div class="add">
         <div class="tit">
@@ -94,7 +87,7 @@
             placeholder="请输入稿件标题"
             v-model="title"
             @blur="uBlur"
-          >
+          />
         </div>
         <div class="xzlm">
           <span>选择投稿栏目</span>
@@ -109,16 +102,19 @@
               :key="item.id"
               :value="item.id"
               class="phone"
-            >{{item.name}}</option>
+              >{{ item.name }}</option
+            >
           </select>
         </div>
 
         <!-- 选择明星标题标签 -->
         <div class="select">
-          <p>选择明星标题标签（只能选填一个明星，该标签会在视频标题前面展示）</p>
+          <p>
+            选择明星标题标签（只能选填一个明星，该标签会在视频标题前面展示）
+          </p>
           <div class="mx">
             <div class="sel-label1">
-              <span class="selLabels">{{nameStar}}</span>
+              <span class="selLabels">{{ nameStar }}</span>
             </div>
             <div class="right">
               <input
@@ -135,10 +131,10 @@
             <li
               class="starLi"
               v-for="(item, index) in starList"
-              :key='item.id'
+              :key="item.id"
               @click="choiceStar(index)"
             >
-              {{item.name}}
+              {{ item.name }}
             </li>
           </ul>
         </div>
@@ -148,20 +144,16 @@
           <div class="select">
             <span class="bp">选择视频所属标签（最多可选填十个标签）</span>
             <div class="sel-label">
-              <p v-show="arr.length == 0">为视频选择合适的标签，让更多的人能找到您的视频！</p>
-              <span
-                class="selLabels"
-                v-for="(item, index) in arr"
-                :key='index'
-              >{{item}} <i @click="close(index)">x</i></span>
+              <p v-show="arr.length == 0">
+                为视频选择合适的标签，让更多的人能找到您的视频！
+              </p>
+              <span class="selLabels" v-for="(item, index) in arr" :key="index"
+                >{{ videoId ? item.name : item }} <i @click="close(index)">x</i></span
+              >
             </div>
           </div>
           <div class="right1">
-            <input
-              v-model="spLabel"
-              type="text"
-              placeholder="创建标签"
-            />
+            <input v-model="spLabel" type="text" placeholder="创建标签" />
             <span @click="spSure">确定</span>
           </div>
           <!-- <div
@@ -169,24 +161,18 @@
             v-show="curId"
           > -->
           <div class="label">
-            <ul
-              class="spbq"
-              v-show="curId"
-            >
+            <ul class="spbq" v-show="curId">
               <li
                 v-for="(item, index) in spList"
                 :key="item.id"
                 @click="choiceTab(index)"
               >
-                {{item.name}}
+                {{ item.name }}
               </li>
             </ul>
           </div>
         </div>
-        <div
-          class="none"
-          v-show="!curId"
-        ></div>
+        <div class="none" v-show="!curId"></div>
         <!-- 视频简介 -->
         <div class="intro">
           <p>添加视频简介</p>
@@ -199,17 +185,14 @@
               rows="10"
               v-model="comment"
             ></textarea>
-            <span class="hit">{{remnant}}个字以内</span>
+            <span class="hit">{{ remnant }}个字以内</span>
           </div>
         </div>
         <div class="dsfb">
           <div class="timeing">
-            <input
-              type="checkbox"
-              id="checkAll"
-            >
+            <input type="checkbox" id="checkAll" />
             <label>定制发布</label>
-            <input type="date">
+            <input type="date" />
           </div>
         </div>
         <div class="btns">
@@ -219,7 +202,8 @@
       </div>
     </div>
     <div class="protocol">
-      上传视频，即表示您已同意 <span>扑粉网平台使用协议</span> ，请勿上传色情，反动等违法视频。
+      上传视频，即表示您已同意
+      <span>扑粉网平台使用协议</span> ，请勿上传色情，反动等违法视频。
     </div>
     <footer>暂无页脚</footer>
   </div>
@@ -231,37 +215,39 @@ import {
   classList,
   addVideo,
   uploadImg,
-  addLabel
-} from '../api/home.js'
-import Cookies from 'js-cookie'
+  addLabel,
+  videoInfo
+} from "../api/home.js";
+import Cookies from "js-cookie";
 const getToken = () => {
-  return Cookies.get('tokenAccess')
-}
+  return Cookies.get("tokenAccess");
+};
 export default {
   data() {
     return {
       headers: {
         tokenAccess: getToken()
       },
+      cur: false,
       videoarr: [],
-      filePath: '',
+      filePath: "",
       videoArr: [],
-      starId: '',
-      classId: '',
-      chooseList: '',
-      coverImg: '',
-      imageUrl: '',
-      spLabel: '',
+      starId: "",
+      classId: "",
+      chooseList: "",
+      coverImg: "",
+      imageUrl: "",
+      spLabel: "",
       arr: [],
       spList: [],
       curId: false,
-      title: '',
+      title: "",
       columnList: [],
       starList: [],
-      comment: '',
+      comment: "",
       remnant: 250,
-      nameStar: '明星姓名',
-      starName: '',
+      nameStar: "明星姓名",
+      starName: "",
       options: {
         // target: '//localhost:3000/upload',
         testChunks: false,
@@ -270,56 +256,71 @@ export default {
         }
       },
       attrs: {
-        accept: 'image/*'
+        accept: "image/*"
       }
+    };
+  },
+  computed: {
+    videoId() {
+      return this.$route.query.videoId;
+    }
+  },
+  mounted() {
+    var type = this.$route.query.videoId;
+    if (type) {
+      this._videoInfo(this.videoId);
     }
   },
 
   created() {
     // this.options.target = '/req/api/index/file'
-    this.options.target = 'http://fapi.mimanduo.xyz/api/index/file'
-    this._getLabel(1)
-    this._classList()
+    this.options.target = "http://fapi.mimanduo.xyz/api/index/file";
+    this._getLabel(1);
+    this._classList();
   },
 
   methods: {
+    closeSuc() {
+      this.cur = false;
+    },
+
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw)
-      this.coverImg = res.data.imgPath
+      this.imageUrl = URL.createObjectURL(file.raw);
+      this.coverImg = res.data.imgPath;
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 / 1024 < 2
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
 
       if (!isJPG) {
-        this.$message.error('上传图片只能是 JPG 格式!')
+        this.$message.error("上传图片只能是 JPG 格式!");
       }
       if (!isLt2M) {
-        this.$message.error('上传图片大小不能超过 2MB!')
+        this.$message.error("上传图片大小不能超过 2MB!");
       }
-      return isJPG && isLt2M
+      return isJPG && isLt2M;
     },
 
     // 视频上传成功
     onFileSuccess(rootFile, file, response, chunk) {
-      const res = JSON.parse(response)
-      this.filePath = res.file_path
-      console.log(rootFile, file, response, chunk, '9999')
+      const res = JSON.parse(response);
+      this.filePath = res.file_path;
+      console.log(rootFile, file, response, chunk, "9999");
     },
 
     changeSelect() {
-      this.classId = this.chooseList
+      this.classId = this.chooseList;
     },
     // 提交发布
     release() {
-      var name = this.title
-      var coverImg = this.coverImg
-      var describe = this.comment
-      var classId = this.classId
-      var videoSrc = this.filePath
-      var titleLabel = this.starId
-      var videoLabel = this.videoArr
-      var length = 1
+      var name = this.title;
+      var coverImg = this.coverImg;
+      var describe = this.comment;
+      var classId = this.classId;
+      var videoSrc = this.filePath;
+      var titleLabel = this.starId;
+      var videoLabel = this.videoArr;
+      var length = 1;
       this._addVideo(
         name,
         coverImg,
@@ -329,19 +330,28 @@ export default {
         titleLabel,
         videoLabel,
         length
-      )
+      );
+    },
+
+    // 获取详情
+    async _videoInfo(videoId) {
+      const res = await videoInfo(videoId);
+      this.title = res.data.name;
+      this.comment = res.data.describe;
+      this.arr = res.data.video_label;
+      this.newStar = res.data.title_label;
     },
 
     drafts() {
-      var name = this.title
-      var coverImg = this.coverImg
-      var describe = this.comment
-      var classId = this.classId
-      var videoSrc = this.filePath
-      var titleLabel = this.starId
-      var videoLabel = this.videoArr
-      var length = 1
-      var isdrafts = 0
+      var name = this.title;
+      var coverImg = this.coverImg;
+      var describe = this.comment;
+      var classId = this.classId;
+      var videoSrc = this.filePath;
+      var titleLabel = this.starId;
+      var videoLabel = this.videoArr;
+      var length = 1;
+      var isdrafts = 0;
       this._addVideo(
         name,
         coverImg,
@@ -352,7 +362,7 @@ export default {
         videoLabel,
         length,
         isdrafts
-      )
+      );
     },
 
     // 提交发布视频
@@ -377,106 +387,108 @@ export default {
         videoLabel,
         length,
         isdrafts
-      )
+      );
+      if (res.code != "1") {
+        this.cur = true;
+      }
     },
 
     // 选择明星标签
     choiceStar(index) {
-      var tab = this.starList[index].name
-      this.nameStar = tab
-      var starLabel = this.starList[index].id
-      this.starId = starLabel
+      var tab = this.starList[index].name;
+      this.nameStar = tab;
+      var starLabel = this.starList[index].id;
+      this.starId = starLabel;
     },
 
     // 选择视频标签
     choiceTab(index) {
-      var tab = this.spList[index].name
-      var videoLabel = this.spList[index].id
+      var tab = this.spList[index].name;
+      var videoLabel = this.spList[index].id;
       if (this.arr.length >= 10) {
-        return
-      } else if (this.arr.indexOf(tab) == '-1') {
-        this.arr.push(tab)
-        this.videoarr.push(videoLabel)
-        this.videoArr = JSON.stringify(this.videoarr)
+        return;
+      } else if (this.arr.indexOf(tab) == "-1") {
+        this.arr.push(tab);
+        this.videoarr.push(videoLabel);
+        this.videoArr = JSON.stringify(this.videoarr);
       }
-      console.log(this.videoArr, 'eee')
     },
 
     close(index) {
-      this.arr.splice(index, 1)
+      this.arr.splice(index, 1);
       // 从入参数组里删除
-      this.videoarr.splice(index, 1)
-      this.videoArr = JSON.stringify(this.videoarr)
-      console.log(this.videoArr, 'eee')
+      this.videoarr.splice(index, 1);
+      this.videoArr = JSON.stringify(this.videoarr);
+      console.log(this.videoArr, "eee");
     },
 
     // 标题失去焦点
     uBlur() {
-      if (this.title != '') {
-        this._getLabel(0, this.title)
+      if (this.title != "") {
+        this._getLabel(0, this.title);
       }
     },
 
     // 获取标签
     async _getLabel(isStart, name) {
-      const res = await getLabel(isStart, name)
+      const res = await getLabel(isStart, name);
 
-      if (res.code === '1' && name != undefined) {
-        this.spList = res.data
-        this.curId = true
+      if (res.code === "1" && name != undefined) {
+        this.spList = res.data;
+        this.curId = true;
       } else {
-        this.starList = res.data
+        this.starList = res.data;
       }
     },
 
     // 分区
     async _classList() {
-      const res = await classList()
-      this.columnList = res.data
+      const res = await classList();
+      this.columnList = res.data;
     },
 
     // 确定明星名字
     sure() {
-      var name = this.starName
-      if (name != '') {
-        this._addLabel(1, name)
+      var name = this.starName;
+      if (name != "") {
+        this._addLabel(1, name);
       }
     },
 
     // 新建确定视频标签
     spSure() {
-      var name = this.spLabel
-      if (this.spLabel != '') {
-        this._addLabel(0, name)
+      var name = this.spLabel;
+      if (this.spLabel != "") {
+        this._addLabel(0, name);
       }
     },
 
     // 新增标签
     async _addLabel(isStart, name) {
-      const res = await addLabel(isStart, name)
-      var videoLabel = res.labelId
-      if (isStart == 1 && res.code == '1') {
-        this.nameStar = name
-        this.starId = videoLabel
-      } else if (isStart == 0 && res.code == '1') {
+      const res = await addLabel(isStart, name);
+      var videoLabel = res.labelId;
+      if (isStart == 1 && res.code == "1") {
+        this.nameStar = name;
+        this.starId = videoLabel;
+      } else if (isStart == 0 && res.code == "1") {
         if (this.arr.length >= 10) {
-          return
-        } else if (this.arr.indexOf(name) == '-1') {
-          this.arr.push(name)
-          this.videoarr.push(Number(videoLabel))
-          this.videoArr = JSON.stringify(this.videoarr)
+          return;
+        } else if (this.arr.indexOf(name) == "-1") {
+          this.arr.push(name);
+          this.videoarr.push(Number(videoLabel));
+          this.videoArr = JSON.stringify(this.videoarr);
         }
-        console.log(this.videoArr, 'ppp')
+        console.log(this.videoArr, "ppp");
       }
     },
 
     //  视频简介字数
     descInput() {
-      var txtVal = this.comment.length
-      this.remnant = 250 - txtVal
+      var txtVal = this.comment.length;
+      this.remnant = 250 - txtVal;
     }
   }
-}
+};
 </script>
 <style lang="less" scoped>
 .uoloadV {
@@ -1035,7 +1047,7 @@ export default {
           border: 0;
           outline: none;
           padding: 15px;
-          font-family: 'Microsoft Yahei';
+          font-family: "Microsoft Yahei";
           color: #7e7e7e;
         }
         .hit {
@@ -1123,4 +1135,3 @@ footer {
   color: red;
 }
 </style>
-

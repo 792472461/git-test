@@ -19,22 +19,12 @@
         </ul>
       </div>
       <div v-show="type == 'accountSetting'">
-        <div
-          class="xgSuc"
-          v-show="curId"
-        >修改成功</div>
+        <div class="xgSuc" v-show="curId">修改成功</div>
         <div class="approve area">
-          <p><img
-              class="headimg"
-              :src="msg.avatar"
-            /></p>
+          <p><img class="headimg" :src="msg.avatar" /></p>
           <p>
             <span>昵称：</span>
-            <input
-              class="name"
-              type="text"
-              v-model="nickname"
-            />
+            <input class="name" type="text" v-model="nickname" />
           </p>
           <p>
             <span>性别：</span>
@@ -44,27 +34,18 @@
               value="1"
               name="sex"
               id="man"
-            /><label
-              for="man"
-              class="boy"
-            >男</label>
+            /><label for="man" class="boy">男</label>
             <input
               type="radio"
               v-model="picked"
               value="0"
               name="sex"
               id="woman"
-            /><label
-              for="woman"
-              class="girl"
-            >女</label>
+            /><label for="woman" class="girl">女</label>
           </p>
           <p>
             <span>生日：</span>
-            <input
-              type="date"
-              v-model="birthday"
-            />
+            <input type="date" v-model="birthday" />
           </p>
           <p>
             <span class="intro">简介：</span>
@@ -95,12 +76,14 @@
                 <span
                   @click="changePhone(1)"
                   :class="status.is_mobile == 1 ? 'binding2' : 'binding1'"
-                >{{ status.is_mobile == 1 ? "已绑定" : "去绑定" }}</span>
+                  >{{ status.is_mobile == 1 ? "已绑定" : "去绑定" }}</span
+                >
                 <span
                   v-show="status.is_mobile == 0"
                   @click="changePhone(2)"
                   class="binding3"
-                >更改绑定手机 &gt;</span>
+                  >更改绑定手机 &gt;</span
+                >
               </p>
             </div>
           </div>
@@ -124,13 +107,14 @@
                 <span
                   @click="changePhone(3)"
                   :class="status.is_email == 1 ? 'binding2' : 'binding1'"
-                >{{ status.is_email == 1 ? "已绑定" : "去绑定" }}
+                  >{{ status.is_email == 1 ? "已绑定" : "去绑定" }}
                 </span>
                 <span
                   v-show="status.is_email == 1"
                   @click="changePhone(4)"
                   class="binding3"
-                >更改绑定邮箱 &gt;</span>
+                  >更改绑定邮箱 &gt;</span
+                >
               </p>
             </div>
           </div>
@@ -142,10 +126,7 @@
             <div class="set-right">
               <p>可修改账号密码</p>
               <p class="bind">
-                <span
-                  class="binding1"
-                  @click="changePhone(5)"
-                >去设置</span>
+                <span class="binding1" @click="changePhone(5)">去设置</span>
               </p>
             </div>
           </div>
@@ -169,7 +150,7 @@
                 <span
                   @click="changePhone(6)"
                   :class="status.is_verify == 1 ? 'binding2' : 'binding1'"
-                >{{ status.is_verify == 1 ? "已认证" : "去认证" }}
+                  >{{ status.is_verify == 1 ? "已认证" : "去认证" }}
                 </span>
               </p>
             </div>
@@ -193,44 +174,44 @@
   </div>
 </template>
 <script>
-import { accountSet, updateUserInfo, accounStatus } from '../api/home.js'
+import { accountSet, updateUserInfo, accounStatus } from "../api/home.js";
 export default {
   data() {
     return {
       status: {},
       type: this.$route.query.type,
       curId: false,
-      nickname: '',
-      birthday: '',
-      score: '',
-      picked: '',
+      nickname: "",
+      birthday: "",
+      score: "",
+      picked: "",
       msg: {},
       target: 1,
       // 是否绑定手机 邮箱 实名的状态 0 否 1 已绑定
       phoneState: 1,
       emailState: 0,
       realnameState: 1
-    }
+    };
   },
 
   methods: {
     set(tag) {
-      this.type = tag
-      this.$router.replace('/editData?type=' + tag)
+      this.type = tag;
+      this.$router.replace("/editData?type=" + tag);
     },
     // 账号安全状态
     async _accounStatus() {
-      const res = await accounStatus()
-      this.status = res.data
+      const res = await accounStatus();
+      this.status = res.data;
     },
     //  账号设置个人资料详情
     async _accountSet() {
-      const res = await accountSet()
-      this.msg = res.data
-      this.picked = res.data.gender
-      this.birthday = res.data.birthday
-      this.score = res.data.score
-      this.nickname = res.data.nickname
+      const res = await accountSet();
+      this.msg = res.data;
+      this.picked = res.data.gender;
+      this.birthday = res.data.birthday;
+      this.score = res.data.score;
+      this.nickname = res.data.nickname;
     },
 
     //  编辑用户个人资料
@@ -240,12 +221,12 @@ export default {
         this.picked,
         this.birthday,
         this.score
-      )
-      if (res.code === '1') {
-        this.curId = true
+      );
+      if (res.code === "1") {
+        this.curId = true;
         setTimeout(() => {
-          this.curId = false
-        }, 2000)
+          this.curId = false;
+        }, 2000);
       }
     },
 
@@ -255,76 +236,76 @@ export default {
         this.picked,
         this.birthday,
         this.score
-      )
+      );
     },
 
     search() {
       this.$router.push({
-        path: '/search',
+        path: "/search",
         query: {
           name: 11111
         }
-      })
+      });
     },
 
     changePhone(i) {
       // 绑定手机
       if (i == 1) {
         this.$router.push({
-          path: '/slectWay',
+          path: "/slectWay",
           query: {
-            mode: 'bindPhone',
-            state: 'toBindPhone'
+            mode: "bindPhone",
+            state: "toBindPhone"
           }
-        })
+        });
       }
       // 改绑手机
       if (i == 2) {
         this.$router.push({
-          path: '/slectWay',
+          path: "/slectWay",
           query: {
-            mode: 'bindPhone',
-            state: 'bindingPhone'
+            mode: "bindPhone",
+            state: "bindingPhone"
           }
-        })
+        });
       }
       // 绑定邮箱
       if (i == 3) {
         this.$router.push({
-          path: '/slectWay',
+          path: "/slectWay",
           query: {
-            mode: 'bindEmail',
-            state: 'toBindEmail'
+            mode: "bindEmail",
+            state: "toBindEmail"
           }
-        })
+        });
       }
       // 改绑邮箱
       if (i == 4) {
         this.$router.push({
-          path: '/slectWay',
+          path: "/slectWay",
           query: {
-            mode: 'bindEmail',
-            state: 'bindingEmail'
+            mode: "bindEmail",
+            state: "bindingEmail"
           }
-        })
+        });
       }
       // 重置密码
       if (i == 5) {
         this.$router.push({
-          path: '/resetPassword',
+          path: "/resetPassword",
           query: {
-            name: 'resetPassword'
+            name: "resetPassword"
           }
-        })
+        });
       }
       // 实名认证
       if (i == 6) {
         this.$router.push({
-          path: '/certification',
+          path: "/certification",
           query: {
-            name: 'certification'
+            name: "certification"
           }
-        })
+        });
       }
       // if (i == 1) {
       //   this.$router.push({
@@ -384,10 +365,10 @@ export default {
     }
   },
   created() {
-    this._accountSet()
-    this._accounStatus()
+    this._accountSet();
+    this._accounStatus();
   }
-}
+};
 </script>
 <style lang="less" scoped>
 .c {
