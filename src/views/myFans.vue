@@ -8,19 +8,12 @@
           <p><span @click="back">返回</span></p>
         </div>
         <ul class="list_follow">
-          <li
-            class="list"
-            v-for="item in list"
-            :key="item.id"
-          >
+          <li class="list" v-for="item in list" :key="item.id">
             <div
               class="user_img"
               @click="$router.push(`/perHome?userId=${item.user_id}`)"
             >
-              <img
-                :src="item.avatar"
-                class="user"
-              />
+              <img :src="item.avatar" class="user" />
               <div class="img"><img src="@/assets/images/home/Vadd.png" /></div>
             </div>
             <div
@@ -46,60 +39,61 @@
         </ul>
       </div>
     </div>
-    <footer>
-      暂无页脚
-    </footer>
+    <Footer></Footer>
   </div>
 </template>
 <script>
-import { myFansList, followUser, cancelFollow } from '../api/home.js'
+import { myFansList, followUser, cancelFollow } from "../api/home.js";
+import Footer from "../components/footer";
 export default {
   data() {
     return {
-      curId: '',
+      curId: "",
       list: []
-    }
+    };
   },
-
+  components: {
+    Footer
+  },
   methods: {
     //  关注列表
     async _myFansList() {
-      const res = await myFansList()
-      this.list = res.data
+      const res = await myFansList();
+      this.list = res.data;
     },
 
     //  关注用户
     async _followUser(id) {
-      const res = await followUser(id)
-      if (res.code === '1') {
-        this._myFansList()
+      const res = await followUser(id);
+      if (res.code === "1") {
+        this._myFansList();
       }
     },
 
     //  取消关注用户
     async _cancelFollow(id) {
-      const res = await cancelFollow(id)
-      if (res.code === '1') {
-        this._myFansList()
+      const res = await cancelFollow(id);
+      if (res.code === "1") {
+        this._myFansList();
       }
     },
 
     back() {
-      this.$router.go(-1)
+      this.$router.go(-1);
     },
 
     followUser(id) {
-      this._followUser(id)
+      this._followUser(id);
     },
 
     cancelFollow(id) {
-      this._cancelFollow(id)
+      this._cancelFollow(id);
     }
   },
   created() {
-    this._myFansList()
+    this._myFansList();
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -114,7 +108,7 @@ ul li {
     .title {
       width: 100%;
       height: 127px;
-      border-bottom: 1px solid #4e4e4e;
+      border-bottom: 1px solid #dadada;
       .my {
         font-size: 30px;
         color: #303030;
@@ -127,7 +121,7 @@ ul li {
         float: right;
         margin: 0px;
         span {
-          border: 1px solid #606060;
+          border: 1px solid #dadada;
           font-size: 18px;
           border-radius: 4px;
           padding: 6px 30px;
@@ -141,9 +135,9 @@ ul li {
       .list {
         position: relative;
         height: 208px;
-        border-bottom: 1px solid #4e4e4e;
+        border-bottom: 1px solid #dadada;
         padding: 0px;
-        margin: 0px;
+        margin-bottom: 350px;
         .user_img {
           position: absolute;
           left: 34px;

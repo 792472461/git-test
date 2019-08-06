@@ -131,7 +131,7 @@
               <img
                 src="@/assets/images/home/tsu.png"
                 @click="complain()"
-              /><span @click="complain()">投诉</span>
+              /><span @click="complain()">举报</span>
             </p>
           </div>
         </div>
@@ -440,7 +440,7 @@
     <!-- 举报成功 -->
     <div v-show="jbcgId" class="jbcg">举报成功</div>
     <div v-show="cfjbId" class="jbcg">请不要重复举报</div>
-    <footer>暂无页脚</footer>
+    <Footer></Footer>
   </div>
 </template>
 <script>
@@ -467,12 +467,13 @@ import {
   treadReply,
   cancelTreadReply,
   addViews,
-  addVideoHistory
+  addVideoHistory,
+  addShareNum
 } from "../api/home.js";
-// import { setInterval, clearInterval } from "timers";
 import Cookies from "js-cookie";
 import { videoPlayer } from "vue-video-player";
 import videoComment from "../components/VideoComment";
+import Footer from "../components/footer";
 export default {
   data() {
     return {
@@ -545,6 +546,11 @@ export default {
     };
   },
   inject: ["reload"],
+  components: {
+    Footer,
+    videoPlayer,
+    videoComment
+  },
   created() {
     this._vedioInfo(this.videoId);
     var limit = 12;
@@ -588,22 +594,34 @@ export default {
         window.open(
           `https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${linkVal}?sharesource=qzone&title=${ftit}&pics=${lk}&summary=${introduce}`
         );
+        this._addShareNum(this.videoId);
       }
       //新浪微博接口的传参
       if (stype == "sina") {
         window.open(
           `http://service.weibo.com/share/share.php?url=${linkVal}?sharesource=weibo&title=${ftit}&pic=${lk}&appkey=2706825840`
         );
+        this._addShareNum(this.videoId);
       }
       //qq好友接口的传参
       if (stype == "qq") {
         window.open(
           `http://connect.qq.com/widget/shareqq/index.html?url=${linkVal}?sharesource=qzone&title=${ftit}&pics=${lk}&summary=${introduce}`
         );
+        this._addShareNum(this.videoId);
       }
       //生成二维码给微信扫描分享，php生成，也可以用jquery.qrcode.js插件实现二维码生成
       if (stype == "wechat") {
         window.open(`http://zixuephp.net/inc/qrcode_img.php?url=${linkVal}`);
+        this._addShareNum(this.videoId);
+      }
+    },
+
+    // 增加分享量
+    async _addShareNum(id) {
+      const res = await addShareNum(id);
+      if (res.code === "1") {
+        this._vedioInfo(this.videoId);
       }
     },
 
@@ -862,7 +880,6 @@ export default {
           src: res.data.video_src
         }
       ];
-      // this.$refs.video.src = res.data.video_src || "";
       this.followId = res.data.isFollow;
       this.userId = res.data.user_id;
       this.isLike = res.data.is_like;
@@ -1115,14 +1132,6 @@ export default {
         this.blocks = "none";
       }
     }
-  },
-  mounted() {
-    // console.log("当前播放位置", this.$refs.video.currentTime);
-    // console.log("声音的大小", this.$refs.video.volume);
-  },
-  components: {
-    videoPlayer,
-    videoComment
   }
 };
 </script>
@@ -1486,25 +1495,21 @@ export default {
   }
   .videoIntrdon {
     width: 100%;
-    height: 280px;
     margin-top: 60px;
     .videoTit {
-      font-size: 16px;
+      font-size: 22px;
       color: #e15689;
       font-weight: bold;
       text-align: left;
     }
     .videoCont {
       width: auto;
-      height: 137px;
       line-height: 25px;
-      border: 1px solid #b3b3b3;
       padding: 16px;
       font-size: 14px;
       text-align: left;
-      margin-top: 28px;
+      // margin-top: 28px;
       border-radius: 5px;
-      overflow-y: auto;
     }
     .videoLabel {
       width: 100%;
@@ -1640,15 +1645,15 @@ export default {
     width: 1200px;
     height: auto;
     .allComment-tit {
-      height: 41px;
       width: 100%;
-      font-size: 18px;
+      font-size: 22px;
       font-weight: bold;
       color: #e6469a;
       text-align: left;
       line-height: 41px;
-      border-bottom: 1px solid #595959;
+      border-bottom: 1px solid #d2d2d2;
       margin-top: -18px;
+      padding-bottom: 15px;
     }
     .gap {
       padding-top: 180px;
@@ -1975,13 +1980,6 @@ export default {
       }
     }
   }
-}
-footer {
-  width: 100%;
-  height: 250px;
-  background: #ccc;
-  color: red;
-  text-align: center;
 }
 .background {
   position: fixed;

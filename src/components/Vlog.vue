@@ -1,42 +1,37 @@
 <template>
   <div>
     <div class="content">
-      <div
-        class="row-list"
-        v-for="item in moreList"
-        :key="item.id"
-      >
+      <div class="row-list" v-for="item in moreList" :key="item.id">
         <div class="center_list">
           <div
             class="smarllImg"
             @click="$router.push(`/play?videoId=${item.id}`)"
           >
             <img :src="item.cover_img" />
-            <p><span>{{item.length}}</span></p>
+            <p>
+              <span>{{ item.length }}</span>
+            </p>
           </div>
           <div class="centent">
             <div class="tops">
-              <span class="cont p">{{item.describe}}</span>
+              <span class="cont p">{{ item.name }}</span>
             </div>
             <div class="share">
-              <span class="see1">{{item.browse_num}}</span>
-              <span class="see1 love1">{{item.like_num}}</span>
-              <span class="see1 share1">{{item.share_num}}</span>
+              <span class="see1">{{ item.browse_num }}</span>
+              <span class="see1 love1">{{ item.like_num }}</span>
+              <span class="see1 share1">{{ item.share_num }}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div
-      class="paging"
-      v-show="allTotal > 1"
-    >
+    <div class="paging" v-show="allTotal > 1">
       <el-pagination
         background
         layout="prev, pager, next"
         :current-page="+currentPage"
         :page-size="15"
-        :total=total
+        :total="total"
         @current-change="handleCurrentChange"
       >
       </el-pagination>
@@ -44,93 +39,93 @@
   </div>
 </template>
 <script>
-import { moreVideo } from '../api/home.js'
+import { moreVideo } from "../api/home.js";
 
 export default {
   data() {
     return {
-      allTotal: '',
+      allTotal: "",
       total: 0,
       moreList: [],
       list: [1, 2]
-    }
+    };
   },
   computed: {
     Id() {
-      return this.$route.query.id
+      return this.$route.query.id;
     },
     currentPage() {
-      return this.$route.query.page || 1
+      return this.$route.query.page || 1;
     },
     type() {
-      return this.$route.query.type
+      return this.$route.query.type;
     }
   },
 
   watch: {
     $route(to, from) {
-      var limit = 15
-      var page = this.currentPage
-      var order = 'hot'
-      var order1 = 'new'
-      var type = to.query.type
-      if (type == 'hot') {
-        this._moreVideo(limit, page, order)
-      } else if (type == 'new') {
-        this._moreVideo(limit, page, order1)
+      var limit = 15;
+      var page = this.currentPage;
+      var order = "hot";
+      var order1 = "new";
+      var type = to.query.type;
+      if (type == "hot") {
+        this._moreVideo(limit, page, order);
+      } else if (type == "new") {
+        this._moreVideo(limit, page, order1);
       }
     }
   },
 
   created() {
-    var limit = 15
-    var page = this.currentPage
-    var order = 'hot'
-    this._moreVideo(limit, page, order)
+    var limit = 15;
+    var page = this.currentPage;
+    var order = "hot";
+    this._moreVideo(limit, page, order);
   },
-  
+
   methods: {
     //  更多视频
     async _moreVideo(limit, page, order) {
-      const res = await moreVideo(limit, page, this.Id, order)
-      this.moreList = res.data
-      this.total = res.count
-      this.allTotal = res.totalpage
+      const res = await moreVideo(limit, page, this.Id, order);
+      this.moreList = res.data;
+      this.total = res.count;
+      this.allTotal = res.totalpage;
     },
 
     handleCurrentChange(currentPage) {
-      const params = this.$route.query
+      const params = this.$route.query;
       const newParams = Object.assign({}, params, {
         page: currentPage
-      })
+      });
       this.$router.push({
-        path: '/vlog',
+        path: "/vlog",
         query: newParams
-      })
-      var limit = 15
-      var page = this.currentPage
-      this._moreVideo(limit, page)
+      });
+      var limit = 15;
+      var page = this.currentPage;
+      this._moreVideo(limit, page);
     }
   },
 
   mounted() {
     // console.log(window.location.pathname)
-    console.log(this.$route.path)
-    console.log(1111111)
+    console.log(this.$route.path);
+    console.log(1111111);
   },
 
   beforeRouteEnter(to, from, next) {
-    console.log(to)
+    console.log(to);
 
-    console.log(from)
+    console.log(from);
 
-    console.log(next)
+    console.log(next);
 
-    console.log(7799797979)
+    console.log(7799797979);
 
-    next()
+    next();
   }
-}
+};
 </script>
 <style lang="less" scoped>
 /deep/ .el-pagination.is-background .el-pager li:not(.disabled).active {
@@ -260,7 +255,7 @@ export default {
         display: inline-block;
         width: 65px;
         height: 22px;
-        background: url('~@/assets/images/home/love1.png') no-repeat 0 0;
+        background: url("~@/assets/images/home/love1.png") no-repeat 0 0;
         background-size: auto 18px;
         font-size: 12px;
         padding-left: 25px;
@@ -320,5 +315,3 @@ export default {
   }
 }
 </style>
-
-

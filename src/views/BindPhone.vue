@@ -2,11 +2,6 @@
   <div>
     <Header></Header>
     <div class="content area">
-      <!-- <div class="topBack">
-        <span @click="accountSer()">账号安全</span>
-        &nbsp;&nbsp;>&nbsp;&nbsp;
-        <span>绑定手机</span>
-      </div>-->
       <div class="flow">
         <p>
           <img :src="redTick" />
@@ -23,10 +18,7 @@
           <span>{{ arrs[1] }}</span>
         </p>
       </div>
-      <div
-        class="confirm message"
-        v-show="show == 1"
-      >
+      <div class="confirm message" v-show="show == 1">
         <div>
           <p>
             <span>验证{{ name }}</span>
@@ -36,10 +28,7 @@
               @blur="yz1($event)"
               :placeholder="'请输入已绑定的' + name + '号'"
             />
-            <span
-              class="ts"
-              v-show="phoneHit1"
-            >请输入正确的{{ name }}号</span>
+            <span class="ts" v-show="phoneHit1">请输入正确的{{ name }}号</span>
           </p>
           <p class="yzm">
             <span class="yzmleft">
@@ -52,28 +41,16 @@
               type="text"
               :placeholder="'请输入六位' + name + '验证码'"
             />
-            <span
-              class="hit"
-              v-show="yzmHit1"
-            >请输入正确的验证码</span>
+            <span class="hit" v-show="yzmHit1">请输入正确的验证码</span>
             <em @click="sendCode()">{{ vCode }}</em>
-            <span
-              v-show="check"
-              class="hit"
-            >验证码已发送，请注意查收</span>
+            <span v-show="check" class="hit">验证码已发送，请注意查收</span>
           </p>
         </div>
         <div>
-          <button
-            class="next"
-            @click="phoneOk()"
-          >下一步</button>
+          <button class="next" @click="phoneOk()">下一步</button>
         </div>
       </div>
-      <div
-        class="confirm message"
-        v-show="show == 2"
-      >
+      <div class="confirm message" v-show="show == 2">
         <div>
           <p>
             <span>{{ arrs[0] }}</span>
@@ -89,23 +66,11 @@
               @blur="yz2($event)"
               :placeholder="'请输入' + arrs[0] + '号'"
             />
-            <span
-              class="ts"
-              v-show="phoneHit2"
-            >请输入正确的手机号码</span>
-            <span
-              class="ts"
-              v-show="phoneHit3"
-            >请输入正确的邮箱号码</span>
-            <span
-              class="ts"
-              v-show="phoneHit4"
-            >请输入正确的密码格式</span>
+            <span class="ts" v-show="phoneHit2">请输入正确的手机号码</span>
+            <span class="ts" v-show="phoneHit3">请输入正确的邮箱号码</span>
+            <span class="ts" v-show="phoneHit4">请输入正确的密码格式</span>
           </p>
-          <p
-            v-if="arrs[0] == '修改密码'"
-            class="yzm"
-          >
+          <p v-if="arrs[0] == '修改密码'" class="yzm">
             <span>{{ arrs[0] }}</span>
             <input
               v-if="arrs[0] == '确认密码'"
@@ -119,23 +84,11 @@
               @blur="yz2($event)"
               :placeholder="'请输入' + arrs[0] + '号'"
             />
-            <span
-              class="ts"
-              v-show="phoneHit2"
-            >请输入正确的手机号码</span>
-            <span
-              class="ts"
-              v-show="phoneHit3"
-            >请输入正确的邮箱号码</span>
-            <span
-              class="ts"
-              v-show="phoneHit5"
-            >两次填写的密码不相同</span>
+            <span class="ts" v-show="phoneHit2">请输入正确的手机号码</span>
+            <span class="ts" v-show="phoneHit3">请输入正确的邮箱号码</span>
+            <span class="ts" v-show="phoneHit5">两次填写的密码不相同</span>
           </p>
-          <p
-            v-else
-            class="yzm"
-          >
+          <p v-else class="yzm">
             <span>&nbsp;&nbsp;&nbsp;&nbsp;验证码&nbsp;&nbsp;</span>
             <input
               class="yzm1"
@@ -143,44 +96,36 @@
               type="text"
               placeholder="请输入六位验证码"
             />
-            <span
-              class="ts"
-              v-show="yzmHit2"
-            >请输入正确的验证码</span>
+            <span class="ts" v-show="yzmHit2">请输入正确的验证码</span>
             <em @click="sendCode()">{{ vCode }}</em>
-            <span
-              v-show="check"
-              class="hit"
-            >验证码已发送，请注意查收</span>
+            <span v-show="check" class="hit">验证码已发送，请注意查收</span>
           </p>
         </div>
         <div>
           <button @click="changeOk()">下一步</button>
         </div>
       </div>
-      <div
-        class="confirm"
-        v-show="show == 3"
-      >
+      <div class="confirm" v-show="show == 3">
         3S自动跳转登录页
         <button @click="callback()">返回</button>
       </div>
     </div>
-    <footer>暂无页脚</footer>
+    <Footer></Footer>
   </div>
 </template>
 <script>
-import redTick from '@/assets/images/home/redTick.png'
-import grayTick from '@/assets/images/home/grayTick.png'
-import { bindEmail, sendEmail, checkCaptcha } from '../api/home.js'
+import redTick from "@/assets/images/home/redTick.png";
+import grayTick from "@/assets/images/home/grayTick.png";
+import { bindEmail, sendEmail, checkCaptcha } from "../api/home.js";
+import Footer from "../components/footer";
 export default {
   data() {
     return {
-      yzmId: '',
-      name: '',
+      yzmId: "",
+      name: "",
       names: 1,
       show: 1,
-      vCode: '获取验证码',
+      vCode: "获取验证码",
       i: -1,
       check: 0,
       timer: null,
@@ -188,11 +133,11 @@ export default {
       grayTick: grayTick,
       czmm: grayTick,
       czok: grayTick,
-      number: '',
-      showNumber: '',
-      phoneEmail: '',
-      phoneEmailNumber: '',
-      yzsj: '',
+      number: "",
+      showNumber: "",
+      phoneEmail: "",
+      phoneEmailNumber: "",
+      yzsj: "",
       arrs: [],
       // 验证身份
       phoneHit1: false,
@@ -207,150 +152,153 @@ export default {
       phoneState2: null,
       yzmHit2: false,
       yzmState2: null,
-      firstPasWord: '',
-      secondPasWord: ''
-    }
+      firstPasWord: "",
+      secondPasWord: ""
+    };
+  },
+  components: {
+    Footer
   },
   methods: {
     yz1(e) {
-      if (this.name == '手机') {
-        let value = e.target.value
+      if (this.name == "手机") {
+        let value = e.target.value;
         if (!/^1[34578]\d{9}$/.test(value)) {
-          this.phoneHit1 = true
-          this.phoneState = 0
+          this.phoneHit1 = true;
+          this.phoneState = 0;
         } else {
-          this.phoneHit1 = false
-          this.phoneState = 1
+          this.phoneHit1 = false;
+          this.phoneState = 1;
         }
       }
-      if (this.name == '邮箱') {
-        let value = e.target.value
+      if (this.name == "邮箱") {
+        let value = e.target.value;
         if (!/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(value)) {
-          this.phoneHit1 = true
-          this.phoneState = 0
+          this.phoneHit1 = true;
+          this.phoneState = 0;
         } else {
-          this.phoneHit1 = false
-          this.phoneState = 1
+          this.phoneHit1 = false;
+          this.phoneState = 1;
         }
       }
     },
     yz2(e, index) {
-      let i = this.arrs[0]
-      if (i == '绑定手机' || i == '改绑手机') {
-        let value = e.target.value
+      let i = this.arrs[0];
+      if (i == "绑定手机" || i == "改绑手机") {
+        let value = e.target.value;
         if (!/^1[34578]\d{9}$/.test(value)) {
-          this.phoneHit2 = true
-          this.phoneState2 = 0
+          this.phoneHit2 = true;
+          this.phoneState2 = 0;
         } else {
-          this.phoneHit2 = false
-          this.phoneState2 = 1
+          this.phoneHit2 = false;
+          this.phoneState2 = 1;
         }
       }
-      if (i == '绑定邮箱' || i == '改绑邮箱') {
-        let value = e.target.value
+      if (i == "绑定邮箱" || i == "改绑邮箱") {
+        let value = e.target.value;
         if (!/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(value)) {
-          this.phoneHit3 = true
-          this.phoneState2 = 0
+          this.phoneHit3 = true;
+          this.phoneState2 = 0;
         } else {
-          this.phoneHit3 = false
-          this.phoneState2 = 1
+          this.phoneHit3 = false;
+          this.phoneState2 = 1;
         }
       }
-      if (i == '修改密码') {
-        let value = e.target.value
+      if (i == "修改密码") {
+        let value = e.target.value;
         if (index == 1) {
-          this.firstPasWord = value
+          this.firstPasWord = value;
           if (!/^(\d){6,12}$/.test(value)) {
-            this.phoneHit4 = true
-            this.phoneState2 = 0
+            this.phoneHit4 = true;
+            this.phoneState2 = 0;
           } else {
-            this.phoneHit4 = false
-            this.phoneState2 = 1
+            this.phoneHit4 = false;
+            this.phoneState2 = 1;
           }
         }
         if (!index) {
-          this.secondPasWord = value
+          this.secondPasWord = value;
           if (this.firstPasWord != value) {
-            this.phoneHit5 = true
-            this.yzmState2 = 0
+            this.phoneHit5 = true;
+            this.yzmState2 = 0;
           } else {
-            this.phoneHit5 = false
-            this.yzmState2 = 1
+            this.phoneHit5 = false;
+            this.yzmState2 = 1;
           }
         }
       }
     },
     yzm1(e) {
-      let value = e.target.value
+      let value = e.target.value;
       if (!/^\d{6}$/.test(value)) {
-        this.yzmHit1 = true
-        this.check = 0
-        this.yzmState = 0
+        this.yzmHit1 = true;
+        this.check = 0;
+        this.yzmState = 0;
       } else {
-        this.yzmHit1 = false
-        this.yzmState = 1
+        this.yzmHit1 = false;
+        this.yzmState = 1;
       }
     },
     yzm2(e) {
-      let value = e.target.value
+      let value = e.target.value;
       if (!/^\d{6}$/.test(value)) {
-        this.yzmHit2 = true
-        this.check = 0
-        this.yzmState2 = 0
+        this.yzmHit2 = true;
+        this.check = 0;
+        this.yzmState2 = 0;
       } else {
-        this.yzmHit2 = false
-        this.yzmState2 = 1
+        this.yzmHit2 = false;
+        this.yzmState2 = 1;
       }
     },
     accountSer() {
       this.$router.push({
-        path: 'editData',
+        path: "editData",
         query: {
           name: 111
         }
-      })
+      });
     },
 
     // 绑定邮箱
     async _bindEmail(email, captcha) {
-      const res = await bindEmail(email, captcha)
-      if (res.code === '5') {
-        this.yzmHit1 = true
+      const res = await bindEmail(email, captcha);
+      if (res.code === "5") {
+        this.yzmHit1 = true;
       }
     },
 
     // 发送邮箱验证码
     async _sendEmail(email, type) {
-      const res = await sendEmail(email, type)
-      if (res.code === '1') {
+      const res = await sendEmail(email, type);
+      if (res.code === "1") {
         if (this.i == -1) {
-          this.i = 60
-          this.timer = setInterval(this.setTime, 1000)
-          this.vCode = this.i + 's'
-          this.check = 1
-          this.yzmHit1 = false
-          this.yzmHit2 = false
+          this.i = 60;
+          this.timer = setInterval(this.setTime, 1000);
+          this.vCode = this.i + "s";
+          this.check = 1;
+          this.yzmHit1 = false;
+          this.yzmHit2 = false;
         } else {
-          console.log(this.i + '秒后才可再次获取验证码')
+          console.log(this.i + "秒后才可再次获取验证码");
         }
       }
     },
 
     // 验证验证码
     async _checkCaptcha(account, captcha) {
-      const res = await checkCaptcha(account, captcha)
-      if (res.code === '1') {
-        this.show = 2
-        this.vCode = 60 + 's'
-        clearInterval(this.setTime)
+      const res = await checkCaptcha(account, captcha);
+      if (res.code === "1") {
+        this.show = 2;
+        this.vCode = 60 + "s";
+        clearInterval(this.setTime);
       } else {
-        this.yzmHit1 = true
-        this.check = 0
+        this.yzmHit1 = true;
+        this.check = 0;
       }
     },
     // 下一步
     phoneOk() {
-      this._checkCaptcha(this.yzsj, this.yzmId)
+      this._checkCaptcha(this.yzsj, this.yzmId);
       // 绑定邮箱
       // this.state = this.$route.query.state
       // var state = this.state.indexOf('绑定成功')
@@ -383,74 +331,74 @@ export default {
       // }
     },
     changeOk() {
-      let i = this.arrs[0]
+      let i = this.arrs[0];
       if (this.phoneState2) {
         if (this.yzmState2) {
-          if (this.arrs[0] == '修改密码') {
+          if (this.arrs[0] == "修改密码") {
             if (this.firstPasWord == this.secondPasWord) {
-              this.show = 3
-              this.czok = this.redTick
+              this.show = 3;
+              this.czok = this.redTick;
             } else {
-              this.phoneHit5 = true
+              this.phoneHit5 = true;
             }
           } else {
-            this.show = 3
-            this.czok = this.redTick
+            this.show = 3;
+            this.czok = this.redTick;
           }
         } else {
-          if (i == '修改密码') {
-            this.phoneHit5 = true
+          if (i == "修改密码") {
+            this.phoneHit5 = true;
           } else {
-            this.yzmHit2 = true
+            this.yzmHit2 = true;
           }
         }
       } else {
-        if (i == '绑定手机' || i == '改绑手机') {
-          this.phoneHit2 = true
+        if (i == "绑定手机" || i == "改绑手机") {
+          this.phoneHit2 = true;
         }
-        if (i == '绑定邮箱' || i == '改绑邮箱') {
-          this.phoneHit3 = true
+        if (i == "绑定邮箱" || i == "改绑邮箱") {
+          this.phoneHit3 = true;
         }
-        if (i == '修改密码') {
-          this.phoneHit4 = true
+        if (i == "修改密码") {
+          this.phoneHit4 = true;
         }
         if (!this.yzmState2) {
-          if (i == '修改密码') {
-            this.phoneHit5 = true
+          if (i == "修改密码") {
+            this.phoneHit5 = true;
           } else {
-            this.yzmHit2 = true
+            this.yzmHit2 = true;
           }
         }
       }
     },
     callback() {
-      this.show = 1
-      this.czmm = this.grayTick
-      this.czok = this.grayTick
-      console.log('恭喜重置成功')
+      this.show = 1;
+      this.czmm = this.grayTick;
+      this.czok = this.grayTick;
+      console.log("恭喜重置成功");
     },
     pre() {
-      this.show = 1
-      this.czmm = this.grayTick
+      this.show = 1;
+      this.czmm = this.grayTick;
     },
     setTime() {
       if (this.i == 0) {
-        this.i--
-        window.clearInterval(this.timer)
-        this.timer = null
-        this.vCode = '获取验证码'
-        this.check = 0
+        this.i--;
+        window.clearInterval(this.timer);
+        this.timer = null;
+        this.vCode = "获取验证码";
+        this.check = 0;
       } else {
-        this.i--
-        this.vCode = this.i + 's'
+        this.i--;
+        this.vCode = this.i + "s";
       }
     },
     // 发送验证码
     sendCode() {
-      this.state = this.$route.query.state
-      var state = this.state.indexOf('绑定成功')
-      if (state != -1 && this.yzsj != '') {
-        this._sendEmail(this.yzsj, 1)
+      this.state = this.$route.query.state;
+      var state = this.state.indexOf("绑定成功");
+      if (state != -1 && this.yzsj != "") {
+        this._sendEmail(this.yzsj, 1);
       }
     }
   },
@@ -459,21 +407,21 @@ export default {
   },
   mounted() {
     if (this.$route.query.names == "toBindPhone") {
-      this.name = '邮箱'
+      this.name = "邮箱";
     }
     if (this.$route.query.names == "bindingPhone") {
-      this.name = '手机'
+      this.name = "手机";
     }
-      if (this.$route.query.names == "toBindEmail") {
-      this.name = '手机'
+    if (this.$route.query.names == "toBindEmail") {
+      this.name = "手机";
     }
     if (this.$route.query.names == "bindingEmail") {
-      this.name = '邮箱'
+      this.name = "邮箱";
     }
 
-    this.arrs = this.$route.query.state || []
+    this.arrs = this.$route.query.state || [];
   }
-}
+};
 </script>
 
 <style lang="less" scoped>

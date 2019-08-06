@@ -41,11 +41,6 @@
         <img class="backgroudimg" :src="list.banner" />
         <div :class="{ nav: 1, navBottom: showColor == 0 }">
           <ul class="area">
-            <!-- <li v-for="(item,key,index) in objs" :key="index" v-if="index >= 1" :class="{slect: showColor == 0}">
-              {{item[0]}}
-              <div v-show="showColor == 0" class="card"><i></i></div>
-            </li>-->
-
             <li @click="tab(0, shouyeid[1])" :class="{ slect: showColor == 0 }">
               首页
               <div v-show="showColor == 0" class="card">
@@ -74,12 +69,11 @@
         <span @click="news()" :class="{ redColor: target == 1 }">最新发布</span>
         <i :class="{ lines: 1, moveline: target == 0 }"></i>
       </div>
-      <img src="../assets/images/home/whitePinBG.png" />
     </div>
     <div class="container area">
       <router-view></router-view>
     </div>
-    <div class="footer">页脚暂无内容99999</div>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -87,6 +81,7 @@
 import { homePage, classList, userInfo, getRandomKey } from "../api/home.js";
 import Cookies from "js-cookie";
 import { mapState, mapActions, mapMutations } from "vuex";
+import Footer from "../components/footer";
 export default {
   name: "home",
   data() {
@@ -117,6 +112,9 @@ export default {
     if (this.token) {
       this.GET_USER_INFO();
     }
+  },
+  components: {
+    Footer
   },
   computed: {
     ...mapState(["token", "userName", "userId"]),
@@ -400,6 +398,13 @@ export default {
     },
     logo() {},
     help() {
+      this.$router.push({
+        path: "/help",
+        query: {
+          name: "help"
+        }
+      });
+
       let data = {
         name: 1,
         content: 2
@@ -437,13 +442,6 @@ export default {
       other: [obj.data.other.title, obj.data.other.id]
     };
     this.objs = objs;
-    // arr.push({"title":obj.data.home.title,"id":obj.data.home.id})
-    // arr.push({"title":obj.data.show.title,"id":obj.data.show.id})
-    // arr.push({"title":obj.data.Vlog.title,"id":obj.data.Vlog.id})
-    // arr.push({"title":obj.data.now.title,"id":obj.data.now.id})
-    // arr.push({"title":obj.data.openB.title,"id":obj.data.openB.id})
-    // arr.push({"title":obj.data.other.title,"id":obj.data.other.id})
-    // this.baran = arr;
     if (this.$route.path == "/") {
       this.hit = this.objs.show[0];
       this.showColor = 0;
@@ -685,6 +683,7 @@ export default {
         top: 15px;
         font-size: 20px;
         color: #565656;
+        cursor: pointer;
       }
     }
     .userCard {
@@ -734,7 +733,7 @@ export default {
     .backgroudimg {
       display: block;
       width: 100%;
-      height: 270px;
+      height: 230px;
       padding: 0;
     }
     .nav {

@@ -11,7 +11,9 @@
             </div>
             <span class="b">通过手机号验证</span>
             <br />
-            <span class="s">如果你的绑定手机号可用，则可通过绑定的手机号发送验证码修改</span>
+            <span class="s"
+              >如果你的绑定手机号可用，则可通过绑定的手机号发送验证码修改</span
+            >
           </div>
           <div class="right">
             <button
@@ -30,7 +32,9 @@
             </div>
             <span class="b">通过邮箱验证</span>
             <br />
-            <span class="s">如果你的账号绑定邮箱，则可通过向绑定邮箱发送验证码修改</span>
+            <span class="s"
+              >如果你的账号绑定邮箱，则可通过向绑定邮箱发送验证码修改</span
+            >
           </div>
           <div class="right">
             <button
@@ -44,83 +48,86 @@
         </div>
       </div>
     </div>
-    <footer>暂无页脚</footer>
+    <Footer></Footer>
   </div>
 </template>
 <script>
+import Footer from "../components/footer";
 export default {
   data() {
     return {
-      name: '',
+      name: "",
       preState: null,
       dosomething: [],
       noclickphone: true,
       noclickemail: true
-    }
+    };
   },
-
+  components: {
+    Footer
+  },
   methods: {
     yz(i) {
-      let preState = this.preState
-      let that = this
+      let preState = this.preState;
+      let that = this;
       if (i == 1) {
         this.$router.push({
-          path: '/bindPhone',
+          path: "/bindPhone",
           query: {
-            name: 'Phone',
+            name: "Phone",
             names: preState,
             state: that.dosomething
           }
-        })
+        });
       }
       if (i == 2) {
         this.$router.push({
-          path: '/bindPhone',
+          path: "/bindPhone",
           query: {
-            name: 'Email',
+            name: "Email",
             names: preState,
             state: that.dosomething
           }
-        })
+        });
       }
     }
   },
   mounted() {
-    this.name = this.$route.query.mode
-    this.preState = this.$route.query.state
+    this.name = this.$route.query.mode;
+    this.preState = this.$route.query.state;
 
-    if (this.name == 'bindPhone') {
-      if (this.preState == 'toBindPhone') {
-        this.dos = '绑定手机'
-        this.dosomething = ['绑定手机', '绑定成功']
-        this.noclickphone = false
-        this.noclickemail = true
-      } else if (this.preState == 'bindingPhone') {
-        this.dos = '改绑手机'
-        this.dosomething = ['改绑手机', '改绑成功']
-        this.noclickphone = false
-        this.noclickemail = true
+    if (this.name == "bindPhone") {
+      if (this.preState == "toBindPhone") {
+        this.dos = "绑定手机";
+        this.dosomething = ["绑定手机", "绑定成功"];
+        this.noclickphone = false;
+        this.noclickemail = true;
+      } else if (this.preState == "bindingPhone") {
+        this.dos = "改绑手机";
+        this.dosomething = ["改绑手机", "改绑成功"];
+        this.noclickphone = false;
+        this.noclickemail = true;
       }
     }
-    if (this.name == 'bindEmail') {
-      if (this.preState == 'toBindEmail') {
-        this.dos = '绑定邮箱'
-        this.dosomething = ['绑定邮箱', '绑定成功']
-        this.noclickphone = true
-        this.noclickemail = false
-      } else if (this.preState == 'bindingEmail') {
-        this.dos = '改绑邮箱'
-        this.dosomething = ['改绑邮箱', '改绑成功']
-        this.noclickphone = true
-        this.noclickemail = false
+    if (this.name == "bindEmail") {
+      if (this.preState == "toBindEmail") {
+        this.dos = "绑定邮箱";
+        this.dosomething = ["绑定邮箱", "绑定成功"];
+        this.noclickphone = true;
+        this.noclickemail = false;
+      } else if (this.preState == "bindingEmail") {
+        this.dos = "改绑邮箱";
+        this.dosomething = ["改绑邮箱", "改绑成功"];
+        this.noclickphone = true;
+        this.noclickemail = false;
       }
     }
     if (this.name == 3) {
-      this.dos = '修改密码'
-      this.dosomething = ['修改密码', '修改成功']
+      this.dos = "修改密码";
+      this.dosomething = ["修改密码", "修改成功"];
     }
   }
-}
+};
 </script>
 <style lang="less" scoped>
 .yz {

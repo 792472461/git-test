@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="home"
-    style="background:#FFFFFF;overflow:hidden"
-  >
+  <div class="home" style="background:#FFFFFF;overflow:hidden">
     <div class="title">
       <Header></Header>
     </div>
@@ -14,7 +11,7 @@
             type="text"
             placeholder="请输入您要搜索的关键词"
             v-model="gjc"
-          >
+          />
           <button @click="gjcSearch">搜 索</button>
         </p>
       </div>
@@ -29,18 +26,11 @@
     <div class="container">
       <div>
         <div class="content">
-          <div
-            class="none"
-            v-show="curId"
-          >
+          <div class="none" v-show="curId">
             <img src="~@/assets/images/home/none.png" />
             <p>暂时无搜索结果</p>
           </div>
-          <div
-            v-for="item in list"
-            :key='item.id'
-            class="row-list"
-          >
+          <div v-for="item in list" :key="item.id" class="row-list">
             <div
               class="smarllImg"
               @click="$router.push(`/play?videoId=${item.id}`)"
@@ -49,168 +39,167 @@
             </div>
             <div class="centent">
               <div class="tops">
-                <span class="cont p">{{item.name}}</span>
+                <span class="cont p">{{ item.name }}</span>
               </div>
               <div class="share">
-                <span class="see1">{{item.browse_num}}</span>
-                <span class="see1 love1">{{item.like_num}}</span>
-                <span class="see1 share1">{{item.share_num}}</span>
+                <span class="see1">{{ item.browse_num }}</span>
+                <span class="see1 love1">{{ item.like_num }}</span>
+                <span class="see1 share1">{{ item.share_num }}</span>
               </div>
             </div>
           </div>
         </div>
-        <div
-          class="paging"
-          v-show="allTotal > 1"
-        >
+        <div class="paging" v-show="allTotal > 1">
           <el-pagination
             background
             layout="prev, pager, next"
             :current-page="+currentPage"
             :page-size="15"
-            :total=total
+            :total="total"
             @current-change="handleCurrentChange"
           >
           </el-pagination>
         </div>
       </div>
     </div>
-    <div class="footer">
-      页脚暂无内容99999
-    </div>
+    <Footer> </Footer>
   </div>
 </template>
 
 <script>
-import { search } from '../api/home.js'
+import { search } from "../api/home.js";
+import Footer from "../components/footer";
 export default {
-  name: 'home',
+  name: "home",
   data() {
     return {
-      allTotal: '',
+      allTotal: "",
       total: 0,
       curId: false,
-      gjc: '',
+      gjc: "",
       list: [],
       showColor: 0,
-      hit: '第一届show大赛'
-    }
+      hit: "第一届show大赛"
+    };
+  },
+  components: {
+    Footer
   },
   computed: {
     wordId() {
-      return this.$route.query.word
+      return this.$route.query.word;
     },
     currentPage() {
-      return this.$route.query.page || 1
+      return this.$route.query.page || 1;
     }
   },
   created() {
-    var limit = 15
-    var page = this.currentPage
-    this._search(limit, page, this.wordId)
+    var limit = 15;
+    var page = this.currentPage;
+    this._search(limit, page, this.wordId);
   },
   methods: {
     handleCurrentChange(currentPage) {
-      const params = this.$route.query
+      const params = this.$route.query;
       const newParams = Object.assign({}, params, {
         page: currentPage
-      })
+      });
       this.$router.push({
-        path: '/search',
+        path: "/search",
         query: newParams
-      })
-      var limit = 15
-      var page = this.currentPage
-      this._search(limit, page, this.wordId)
+      });
+      var limit = 15;
+      var page = this.currentPage;
+      this._search(limit, page, this.wordId);
     },
 
     gjcSearch() {
-      if (this.gjc == '') {
-        return
+      if (this.gjc == "") {
+        return;
       } else {
-        this._search(this.gjc)
+        this._search(this.gjc);
       }
     },
     async _search(limit, page, word) {
-      const res = await search(limit, page, word)
-      this.list = res.data
-      if (res.data.length == '') {
-        this.curId = true
+      const res = await search(limit, page, word);
+      this.list = res.data;
+      if (res.data.length == "") {
+        this.curId = true;
       } else {
-        this.curId = false
+        this.curId = false;
       }
     },
 
     login() {
       this.$router.push({
-        path: '/personalCenter',
+        path: "/personalCenter",
         query: {
-          name: 'login'
+          name: "login"
         }
-      })
+      });
     },
     bar1() {
       this.$router.push({
-        path: '/',
+        path: "/",
         query: {
-          name: 'shouye'
+          name: "shouye"
         }
-      })
-      this.hit = '第一届show大赛'
-      this.showColor = 0
+      });
+      this.hit = "第一届show大赛";
+      this.showColor = 0;
     },
     bar2() {
       this.$router.push({
-        path: '/hit',
+        path: "/hit",
         query: {
-          name: '第一届show大赛 打榜'
+          name: "第一届show大赛 打榜"
         }
-      })
-      this.hit = '打榜'
-      this.showColor = 1
+      });
+      this.hit = "打榜";
+      this.showColor = 1;
     },
     bar3() {
       this.$router.push({
-        path: '/vlog',
+        path: "/vlog",
         query: {
-          name: 'Vlog'
+          name: "Vlog"
         }
-      })
-      this.hit = '第一届show大赛'
-      this.showColor = 2
+      });
+      this.hit = "第一届show大赛";
+      this.showColor = 2;
     },
     bar4() {
       this.$router.push({
-        path: '/now',
+        path: "/now",
         query: {
-          name: '现场'
+          name: "现场"
         }
-      })
-      this.hit = '第一届show大赛'
-      this.showColor = 3
+      });
+      this.hit = "第一届show大赛";
+      this.showColor = 3;
     },
     bar5() {
       this.$router.push({
-        path: '/openB',
+        path: "/openB",
         query: {
-          name: '开箱'
+          name: "开箱"
         }
-      })
-      this.hit = '第一届show大赛'
-      this.showColor = 4
+      });
+      this.hit = "第一届show大赛";
+      this.showColor = 4;
     },
     bar6() {
       this.$router.push({
-        path: '/other',
+        path: "/other",
         query: {
-          name: '其他'
+          name: "其他"
         }
-      })
-      this.hit = '第一届show大赛'
-      this.showColor = 5
+      });
+      this.hit = "第一届show大赛";
+      this.showColor = 5;
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -269,7 +258,6 @@ export default {
   margin: 0 auto;
   overflow: hidden;
   z-index: 9;
-  // background: #f0f2f5;
 }
 .title {
   width: 100%;
@@ -279,7 +267,6 @@ export default {
     margin: 0 auto;
     height: 91px;
     width: 1200px;
-    // border: 1px solid blue;
     .logo {
       float: left;
       height: 74px;
@@ -321,13 +308,11 @@ export default {
       width: 500px;
       height: 50px;
       float: right;
-      // border: 1px solid red;
       margin-top: 20px;
       position: relative;
       .search {
         width: 350px;
         height: 40px;
-        // border: 1px solid red;
         position: absolute;
         right: 120px;
         bottom: 0;
@@ -420,7 +405,6 @@ export default {
         width: 1200px;
         padding: 0;
         list-style: none;
-        // overflow: hidden;
         text-align: left;
         display: -webkit-flex; /* Safari */
         display: flex;
@@ -471,7 +455,6 @@ export default {
   height: 40px;
   position: relative;
   background: #ffd2de;
-  // border-bottom: 1px solid #000;
   box-shadow: 0px 15px 10px -15px #ccc;
   .conts1 {
     position: absolute;
@@ -587,7 +570,7 @@ export default {
         float: left;
         width: 65px;
         height: 22px;
-        background: url('~@/assets/images/home/love1.png') no-repeat 0 0;
+        background: url("~@/assets/images/home/love1.png") no-repeat 0 0;
         background-size: auto 18px;
         font-size: 12px;
         padding-left: 25px;
@@ -609,6 +592,7 @@ export default {
   width: 100%;
   height: auto;
   overflow: hidden;
+  margin-bottom: 200px;
   .none {
     margin-top: 50px;
     img {

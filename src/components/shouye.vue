@@ -15,12 +15,11 @@
           src="@/assets/images/home/play.png"
         />
         <i>{{ best.length }}</i>
-        <!-- <em>独播</em> -->
       </div>
       <div class="zjl zjls">
-        <span class="bigFont">{{ firstVideo.name }}</span>
+        <span class="bigFont">{{ best.title_label }}</span>
         <div class="introduce">
-          <p>{{ best.describe }}</p>
+          <p>{{ best.name }}</p>
           <span class="see">{{ best.browse_num }}</span>
           <span class="see love">{{ best.like_num }}</span>
           <span class="see share">{{ best.share_num }}</span>
@@ -44,11 +43,11 @@
               <div class="list_icon">
                 <img
                   :src="
-                    item.id == 4
+                    index == 0
                       ? second
-                      : item.id == 5
+                      : index == 1
                       ? three
-                      : item.id == 6
+                      : index == 2
                       ? four
                       : five
                   "
@@ -68,7 +67,7 @@
                       : five1
                   "
                 />
-                <span class="name"></span>
+                <span class="name">{{ item.title_label }}</span>
                 <span
                   :class="{
                     cont0: item.name.length == 0,
@@ -135,10 +134,7 @@
     </div>
     <div class="right">
       <div class="newup">
-        <img
-          @click="$router.push(`/uploadVideo`)"
-          src="@/assets/images/home/newUpload.png"
-        />
+        <img src="@/assets/images/home/newUpload.png" />
       </div>
       <div class="col">
         <ul>
@@ -379,7 +375,7 @@ export default {
       p {
         text-align: left;
         color: #3d3d3d;
-        width: 456px;
+        width: 600px;
         height: 40px;
         margin: 8px 0 0 20px;
         font-size: 20px;

@@ -148,7 +148,8 @@
                 为视频选择合适的标签，让更多的人能找到您的视频！
               </p>
               <span class="selLabels" v-for="(item, index) in arr" :key="index"
-                >{{ videoId ? item.name : item }} <i @click="close(index)">x</i></span
+                >{{ videoId ? item.name : item }}
+                <i @click="close(index)">x</i></span
               >
             </div>
           </div>
@@ -203,18 +204,27 @@
     </div>
     <div class="protocol">
       上传视频，即表示您已同意
-      <span>扑粉网平台使用协议</span> ，请勿上传色情，反动等违法视频。
+      <span @click="agree">扑粉网平台使用协议</span>
+      ，请勿上传色情，反动等违法视频。
     </div>
-    <footer>暂无页脚</footer>
+    <Footer></Footer>
   </div>
 </template>
 <script>
+import Footer from "../components/footer";
+// import {
+//   fileVideo,
+//   getLabel,
+//   classList,
+//   addVideo,
+//   uploadImg,
+//   addLabel,
+//   videoInfo
+// } from "../api/home.js";
 import {
-  fileVideo,
   getLabel,
   classList,
   addVideo,
-  uploadImg,
   addLabel,
   videoInfo
 } from "../api/home.js";
@@ -228,6 +238,8 @@ export default {
       headers: {
         tokenAccess: getToken()
       },
+      lock: true,
+      lock1: true,
       cur: false,
       videoarr: [],
       filePath: "",
@@ -260,6 +272,9 @@ export default {
       }
     };
   },
+  components: {
+    Footer
+  },
   computed: {
     videoId() {
       return this.$route.query.videoId;
@@ -280,6 +295,15 @@ export default {
   },
 
   methods: {
+    agree() {
+      this.$router.push({
+        path: "/videoAgreement",
+        query: {
+          name: "videoAgreement"
+        }
+      });
+    },
+
     closeSuc() {
       this.cur = false;
     },
@@ -321,16 +345,21 @@ export default {
       var titleLabel = this.starId;
       var videoLabel = this.videoArr;
       var length = 1;
-      this._addVideo(
-        name,
-        coverImg,
-        describe,
-        classId,
-        videoSrc,
-        titleLabel,
-        videoLabel,
-        length
-      );
+
+      var that = this;
+      if (that.lock === true) {
+        this._addVideo(
+          name,
+          coverImg,
+          describe,
+          classId,
+          videoSrc,
+          titleLabel,
+          videoLabel,
+          length
+        );
+        that.lock = false;
+      }
     },
 
     // 获取详情
@@ -342,6 +371,7 @@ export default {
       this.newStar = res.data.title_label;
     },
 
+    // 存草稿
     drafts() {
       var name = this.title;
       var coverImg = this.coverImg;
@@ -351,18 +381,23 @@ export default {
       var titleLabel = this.starId;
       var videoLabel = this.videoArr;
       var length = 1;
-      var isdrafts = 0;
-      this._addVideo(
-        name,
-        coverImg,
-        describe,
-        classId,
-        videoSrc,
-        titleLabel,
-        videoLabel,
-        length,
-        isdrafts
-      );
+      var isdrafts = 1;
+
+      var that = this;
+      if (that.lock1 === true) {
+        this._addVideo(
+          name,
+          coverImg,
+          describe,
+          classId,
+          videoSrc,
+          titleLabel,
+          videoLabel,
+          length,
+          isdrafts
+        );
+        that.lock1 = false;
+      }
     },
 
     // 提交发布视频
@@ -388,7 +423,7 @@ export default {
         length,
         isdrafts
       );
-      if (res.code != "1") {
+      if (res.code === "1") {
         this.cur = true;
       }
     },
@@ -478,7 +513,6 @@ export default {
           this.videoarr.push(Number(videoLabel));
           this.videoArr = JSON.stringify(this.videoarr);
         }
-        console.log(this.videoArr, "ppp");
       }
     },
 

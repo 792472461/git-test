@@ -32,7 +32,7 @@
           :src="avatar"
           @mouseenter="enter"
         />
-        <span class="help">帮助</span>
+        <span class="help" @click="help()">帮助</span>
       </div>
       <div class="userCard" v-show="showId && token !== ''" @mouseleave="leave">
         <p>{{ userName }}</p>
@@ -102,6 +102,15 @@ export default {
     async _getRandomKey() {
       const res = await getRandomKey();
       this.star = res.data;
+    },
+
+    help() {
+      this.$router.push({
+        path: "/help",
+        query: {
+          name: "help"
+        }
+      });
     },
 
     bar(id) {
@@ -331,6 +340,7 @@ export default {
         right: 0;
         top: 15px;
         font-size: 20px;
+        cursor: pointer;
       }
     }
     .userCard {
@@ -380,7 +390,7 @@ export default {
     .backgroudimg {
       display: block;
       width: 100%;
-      height: 270px;
+      height: 230px;
       padding: 0;
     }
     .nav {

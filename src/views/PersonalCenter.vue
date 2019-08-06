@@ -14,7 +14,7 @@
                 <div class="txImg">
                   <img class="titimg" :src="info.avatar" />
                 </div>
-                <img class="Vadd" src="@/assets/images/home/Vadd.png" />
+                <!-- <img class="Vadd" src="@/assets/images/home/Vadd.png" /> -->
               </div>
               <div class="my">
                 <div class="mys" @click="$router.push(`/follow`)">
@@ -77,16 +77,20 @@
             </div>
           </div>
           <div class="pf">
-            <span class="reds blues">团体认证</span>
+            <span class="reds blues" @click="$router.push(`/group`)"
+              >团体认证</span
+            >
             <div class="condition">
               <div>开通条件：</div>
               <p>
-                粉丝站子或团体相关负责人提供证据（如上传以管理员身份运营的微博账号，百度贴吧账号，论坛账号等）。
+                粉丝站子或团体相关负责人提供证据。
               </p>
             </div>
           </div>
           <div class="pf">
-            <span class="reds yellows">明星认证</span>
+            <span class="reds yellows" @click="$router.push(`/starGroup`)"
+              >明星认证</span
+            >
             <div class="condition">
               <div>开通条件：</div>
               <p>明星本人或工作室提供的相关证明。</p>
@@ -208,7 +212,7 @@
             </p>
             <p class="welcome">{{ item.name }}</p>
             <p class="cole">
-              看到：16:00
+              浏览日期：{{ item.create_time }}
               <img @click="scls(item.id)" src="~@/assets/images/home/ljt.png" />
             </p>
           </div>
@@ -247,7 +251,6 @@
                 >
                 <div class="cont">
                   <p class="h">{{ item.name }}</p>
-                  <!-- <p class="dirct">废材个阻止妹恋爱</p> -->
                   <p class="uptime">上传时间：{{ item.create_time }}</p>
                   <p class="label">
                     <span
@@ -287,9 +290,7 @@
         </div>
       </div>
     </div>
-    <footer>
-      暂无页角
-    </footer>
+    <Footer></Footer>
   </div>
 </template>
 <script>
@@ -304,6 +305,7 @@ import {
   deleteVideo
 } from "../api/home.js";
 import Barnar from "../components/barnar/barnar.vue";
+import Footer from "../components/footer";
 export default {
   data() {
     return {
@@ -391,7 +393,6 @@ export default {
     // 我的视频接口
     async _myVideo(limit, page, isdrafts) {
       const res = await myVideo(limit, page, isdrafts);
-
       this.total = res.count;
       this.allTotal2 = res.totalpage;
       if (isdrafts == 0) {
@@ -399,7 +400,6 @@ export default {
       } else if (isdrafts == 1) {
         this.cgxList = res.data;
       }
-      console.log(this.cgxList, "ppp");
     },
 
     // 删除我的视频
@@ -411,9 +411,9 @@ export default {
         this._myVideo(_limit, page, 0);
       } else if (res.code == "1" && name == 1) {
         this.index = 6;
-        var _limit = 10;
-        var page = this.currentPage;
-        this._myVideo(_limit, page, 1);
+        var limits = 10;
+        var pages = this.currentPage;
+        this._myVideo(limits, pages, 1);
       }
     },
 
@@ -461,10 +461,12 @@ export default {
       const newParams = Object.assign({}, params, {
         page: currentPage
       });
+
       this.$router.push({
         path: "/personalCenter",
         query: newParams
       });
+
       var limit = 10;
       var page = this.currentPage;
       this._myVideo(limit, page);
@@ -523,7 +525,8 @@ export default {
     }
   },
   components: {
-    Barnar
+    Barnar,
+    Footer
   }
 };
 </script>
@@ -697,10 +700,12 @@ export default {
     }
     .blues {
       background: #6b6bca;
+      cursor: pointer;
     }
     .yellows {
       background: #e5c244;
       color: #fff;
+      cursor: pointer;
     }
     .condition {
       margin-left: 30px;
@@ -782,7 +787,7 @@ export default {
       li {
         width: 100%;
         height: 195px;
-        background: #fff7f7;
+        background: #fff;
         overflow: hidden;
         border-radius: 10px;
         .headImg {
@@ -895,8 +900,11 @@ export default {
           }
         }
       }
-      li:nth-child(2n) {
-        background: #fff;
+      li:hover {
+        background: #fff5f5;
+      }
+      li:nth-child(2n):hover {
+        background: #fff5f5;
       }
     }
   }
@@ -958,13 +966,20 @@ export default {
     }
     .welcome {
       font-size: 14px;
-      color: #3f3f3f;
+      color: #8a8a8a;
       text-align: left;
       margin-top: 12px;
+      height: 40px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
     }
     .cole {
       font-size: 12px;
-      color: #3f3f3f;
+      color: #8a8a8a;
       text-align: left;
       width: 100%;
       margin-top: 10px;

@@ -125,6 +125,36 @@ export default new Router({
     {
       path: "/perHome",
       component: () => import("./views/PersonalHomepage.vue")
+    },
+    // 团体认证
+    {
+      path: "/group",
+      component: () => import("./views/Group.vue")
+    },
+    // 明星认证
+    {
+      path: "/starGroup",
+      component: () => import("./views/StarGroup.vue")
+    },
+    // 修改头像
+    {
+      path: "/modifyAvatar",
+      component: () => import("./views/modifyAvatar.vue")
+    },
+    // 帮助页
+    {
+      path: "/help",
+      component: () => import("./views/Help.vue")
+    },
+    // 注册协议页
+    {
+      path: "/agreement",
+      component: () => import("./views/Agreement.vue")
+    },
+    // 发布视频协议页
+    {
+      path: "/videoAgreement",
+      component: () => import("./views/videoAgreement.vue")
     }
   ]
 });

@@ -21,7 +21,13 @@
       <div v-show="type == 'accountSetting'">
         <div class="xgSuc" v-show="curId">修改成功</div>
         <div class="approve area">
-          <p><img class="headimg" :src="msg.avatar" /></p>
+          <p>
+            <img
+              class="headimg"
+              :src="msg.avatar"
+              @click="$router.push(`/modifyAvatar`)"
+            />
+          </p>
           <p>
             <span>昵称：</span>
             <input class="name" type="text" v-model="nickname" />
@@ -51,6 +57,23 @@
             <span class="intro">简介：</span>
             <textarea v-model="score"></textarea>
           </p>
+          <div class="bqtitb">
+            <div class="bqtit">标签：</div>
+            <div class="bq-box">
+              <div class="bq">
+                <input
+                  v-model="tag"
+                  type="text"
+                  placeholder="创建个人专属标签（最多四个）"
+                /><span @click="sureOk">确定</span>
+              </div>
+              <div class="box">
+                <span v-for="(item, index) in arr" :key="index"
+                  >{{ item }}<i @click="close(index)">x</i></span
+                >
+              </div>
+            </div>
+          </div>
           <p>
             <button @click="sure">确认修改</button>
           </p>
@@ -168,16 +191,19 @@
         <br />
       </div>
     </div>
-    <footer>
+    <Footer>
       暂无页角
-    </footer>
+    </Footer>
   </div>
 </template>
 <script>
 import { accountSet, updateUserInfo, accounStatus } from "../api/home.js";
+import Footer from "../components/footer";
 export default {
   data() {
     return {
+      tag: "",
+      arr: [],
       status: {},
       type: this.$route.query.type,
       curId: false,
@@ -193,8 +219,20 @@ export default {
       realnameState: 1
     };
   },
-
+  components: {
+    Footer
+  },
   methods: {
+    sureOk() {
+      if (this.arr.length < 4 && this.arr.indexOf(this.tag) == "-1") {
+        this.arr.push(this.tag);
+      }
+    },
+
+    close(index) {
+      this.arr.splice(index, 1);
+    },
+
     set(tag) {
       this.type = tag;
       this.$router.replace("/editData?type=" + tag);
@@ -382,7 +420,7 @@ export default {
   float: left;
   margin-top: 70px;
   width: 177px;
-  height: 600px;
+  height: 950px;
   background: #f7f7f7;
   ul {
     list-style: none;
@@ -425,12 +463,101 @@ export default {
 }
 .approve {
   width: auto;
-  height: 600px;
+  height: 950px;
   margin: 0 auto;
   text-align: left;
   overflow: hidden;
   margin-top: 102px;
   padding-left: 60px;
+  .bqtitb {
+    display: flex;
+    margin-left: 90px;
+    .bq-box {
+      width: 400px;
+      padding: 20px;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      margin-left: 5px;
+      .bq {
+        display: flex;
+        input {
+          height: 40px;
+          width: 300px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          padding-left: 15px;
+        }
+
+        input::-webkit-input-placeholder {
+          /* WebKit, Blink, Edge */
+          color: #787878;
+        }
+        :-moz-placeholder {
+          /* Mozilla Firefox 4 to 18 */
+          color: #787878;
+        }
+        ::-moz-placeholder {
+          /* Mozilla Firefox 19+ */
+          color: #787878;
+        }
+        input:-ms-input-placeholder {
+          /* Internet Explorer 10-11 */
+          color: #787878;
+        }
+        input::-ms-input-placeholder {
+          /* Microsoft Edge */
+          color: #787878;
+        }
+        span {
+          margin-left: 20px;
+          display: block;
+          width: 100px;
+          height: 40px;
+          background-color: #ff4a9c;
+          color: #fff;
+          border-radius: 5px;
+          text-align: center;
+          line-height: 40px;
+          cursor: pointer;
+        }
+      }
+      .box {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-top: 18px;
+        padding: 20px;
+        overflow: hidden;
+        span {
+          padding: 0 15px;
+          display: block;
+          float: left;
+          height: 30px;
+          line-height: 30px;
+          background: #ff4a9c;
+          color: #fff;
+          text-align: center;
+          border-radius: 5px;
+          margin: 5px;
+          i {
+            float: right;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: #fff8f8;
+            color: #ff4a9c;
+            line-height: 20px;
+            border-radius: 50%;
+            text-align: center;
+            margin-left: 10px;
+            margin-top: 5px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
   p {
     margin: 0;
     padding: 0;
@@ -501,13 +628,15 @@ export default {
   textarea {
     resize: none;
     width: 300px;
-    height: 60px;
+    height: 65px;
     outline: none;
     margin-top: 20px;
     margin-left: -52px;
     padding: 10px;
     border: 1px solid #c8c8c8;
     border-radius: 4px;
+    font-family: ”Microsoft YaHei”;
+    color: #787878;
   }
 }
 .accountSer {

@@ -2,12 +2,15 @@
   <div class="login">
     <div class="logo">
       <div class="inner">
-        <img @click="backHome()" src="@/assets/images/home/logo1.png" />
+        <img @click="backHome()" src="@/assets/images/home/pfen-white.png" />
       </div>
     </div>
     <div class="login_form">
       <div class="inner">
         <div class="form">
+          <div class="suc" v-show="zccg">
+            注册成功<i @click="closeZccg">x</i>
+          </div>
           <div class="tit">账号注册</div>
           <div class="first">
             <input
@@ -88,7 +91,7 @@
                 name="名称"
                 checked="checked"
                 v-model="checkedNames"
-              /><span> 我已同意<a href="">《使用协议》</a></span>
+              /><span> 我已同意<a @click="agreement">《使用协议》</a></span>
             </div>
           </div>
           <button
@@ -98,27 +101,17 @@
           >
             注 册
           </button>
-          <div class="five"><a @click="$router.push(`/login`)">已有账号，直接登录 ></a></div>
+          <div class="five">
+            <a @click="$router.push(`/login`)">已有账号，直接登录 ></a>
+          </div>
         </div>
       </div>
     </div>
-    <footer>
-      <div class="list1">
-        <ul class="lists">
-          <li>关于我们</li>
-          <li>友情链接</li>
-          <li>关于我们</li>
-          <li>友情链接</li>
-          <li>关于我们</li>
-          <li>友情链接</li>
-          <li>关于我们</li>
-          <li>友情链接</li>
-        </ul>
-      </div>
-    </footer>
+    <Footer> </Footer>
   </div>
 </template>
 <script>
+import Footer from "../components/footer";
 import {
   checkNickname,
   checkaccount,
@@ -131,6 +124,7 @@ import {
 export default {
   data() {
     return {
+      zccg: false, // 注册成功弹窗
       uValue: "", // 昵称内容
       wValue: "", // 密码内容
       nValue: "", //手机号/邮箱内容
@@ -160,6 +154,9 @@ export default {
       timeId: true, // 不能重复验证码倒计时
       aLockId: "" // 邮箱重复禁止发送验证码
     };
+  },
+  components: {
+    Footer
   },
   computed: {
     isCanRegister() {
@@ -192,17 +189,38 @@ export default {
   },
 
   methods: {
+    // 关闭注册成功弹窗
+    closeZccg() {
+      this.zccg = false;
+      this.$router.push({
+        path: "/login",
+        query: {
+          name: "login"
+        }
+      });
+    },
+
+    agreement() {
+      this.$router.push({
+        path: "/agreement",
+        query: {
+          name: "agreement"
+        }
+      });
+    },
+
     // 点击扑粉网图片 返回主页
     backHome() {
       this.$router.push({
         path: "/",
         query: {
-          home: "返回主页"
+          home: "toHome"
         }
       });
     },
     //  昵称失去焦点
-    uBlur(e) {
+    // uBlur(e) {
+    uBlur() {
       var username = this.$refs.userName.value;
       var uPattern = /^([\u2E80-\u9FFF]|\w){4,10}$/;
       if (username) {
@@ -215,8 +233,6 @@ export default {
         }
       }
       this._checkNickname(username);
-
-      console.log(e.target.value);
     },
 
     //  密码失去焦点
@@ -332,7 +348,6 @@ export default {
       this.phoneId = false;
       this.aWriteId = false;
       this.sWriteId = false;
-      // this.nBorderId = false
 
       if (number === "" && this.selected === "phone") {
         this.sWriteId = true;
@@ -375,7 +390,6 @@ export default {
       }
 
       if (this.aLockId === true && this.timeId === true) {
-        console.log(1111);
         this.num = 60;
         this.timer = setInterval(this.setTime, 1000);
         this.vCode = this.num + "s";
@@ -400,15 +414,14 @@ export default {
 
     //  发送手机验证码
     async _sendCaptcha(number) {
-      const res = await sendCaptcha(number);
-      console.log(res);
+      var type = 1;
+      await sendCaptcha(number, type);
       this.isSendId = true;
     },
 
     //  发送邮箱验证码
-    async _sendEmail(email, type) {
-      const res = await sendEmail(email, type);
-      console.log(res);
+    async _sendEmail(email) {
+      await sendEmail(email);
       this.isSendId = true;
     },
 
@@ -440,7 +453,7 @@ export default {
       var value = this.yValue;
       const res = await phoneRegister(number, value, nickname, password);
       if (res.code == "1") {
-        console.log("手机号注册成功");
+        this.zccg = true;
       }
     },
 
@@ -450,10 +463,8 @@ export default {
       var password = this.wValue;
       var number = this.nValue;
       var value = this.yValue;
-      const res = await emailRegister(number, value, nickname, password);
-      if (res.code == "1") {
-        console.log("邮箱注册成功");
-      }
+      await emailRegister(number, value, nickname, password);
+      this.zccg = true;
     }
   }
 };
@@ -470,7 +481,7 @@ export default {
     }
   }
   .logo {
-    height: 180px;
+    height: 200px;
     padding-top: 30px;
     background: url("~@/assets/images/home/logo_bg.png") no-repeat;
     background-size: 100% 300px;
@@ -483,7 +494,8 @@ export default {
     }
     img {
       position: absolute;
-      height: 103px;
+      height: 140px;
+      width: 260px;
       left: 0px;
       cursor: pointer;
     }
@@ -491,7 +503,7 @@ export default {
   .login_form {
     text-align: left;
     width: 100%;
-    height: 537px;
+    height: 750px;
     background-size: 100% 100%;
     .inner {
       width: 1200px;
@@ -504,6 +516,27 @@ export default {
       transform: translateX(-50%);
       top: 76px;
       width: 382px;
+      .suc {
+        position: absolute;
+        left: 50%;
+        margin-left: -80px;
+        top: 50%;
+        margin-top: -50px;
+        width: 160px;
+        height: 100px;
+        color: #fff;
+        line-height: 100px;
+        border-radius: 8px;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        i {
+          top: -25px;
+          position: absolute;
+          right: 15px;
+          cursor: pointer;
+        }
+      }
       .tit {
         height: 93px;
         line-height: 93px;
@@ -622,6 +655,7 @@ export default {
           span {
             a {
               color: #ff068f;
+              cursor: pointer;
             }
           }
         }

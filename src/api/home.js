@@ -33,8 +33,9 @@ function checkaccount(account) {
 }
 
 // 发送手机验证码
-function sendCaptcha(mobile) {
+function sendCaptcha(mobile, type) {
   let data = {
+    type: type,
     mobile: mobile
   };
   return axios.post("/api/index/sendCaptcha", data);
@@ -59,9 +60,12 @@ function checkCaptcha(account, captcha) {
 }
 
 // 手机号注册
-function phoneRegister(mobile) {
+function phoneRegister(mobile, captcha, nickname, password) {
   let data = {
-    mobile: mobile
+    mobile: mobile,
+    captcha: captcha,
+    nickname: nickname,
+    password: password
   };
   return axios.post("/api/index/mobileRegister", data);
 }
@@ -121,12 +125,13 @@ function myFansList() {
  * 个人中心接口
  */
 // 编辑用户个人资料
-function updateUserInfo(nickname, gender, birthday, score) {
+function updateUserInfo(nickname, gender, birthday, score, avatar) {
   let data = {
     nickname: nickname,
     gender: gender,
     birthday: birthday,
-    score: score
+    score: score,
+    avatar: avatar
   };
   return axios.post("/api/user/updateUserInfo", data);
 }
@@ -442,7 +447,7 @@ function addVideo(
     title_label: titleLabel,
     video_label: videoLabel,
     length: length,
-    isdrafts: isdrafts
+    drafts: isdrafts
   };
   return axios.post("/api/user/addVideo", data);
 }
@@ -511,6 +516,13 @@ function addVideoHistory(video_id) {
   return axios.post("/api/user/addVideoHistory", data);
 }
 
+// 增加分享量
+function addShareNum(videoId) {
+  const data = {
+    videoId
+  };
+  return axios.post("/api/user/addShareNum", data);
+}
 export {
   login,
   checkNickname,
@@ -570,5 +582,6 @@ export {
   verifyStatus,
   videoInfo,
   addViews,
-  addVideoHistory
+  addVideoHistory,
+  addShareNum
 };

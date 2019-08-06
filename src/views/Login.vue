@@ -2,7 +2,7 @@
   <div class="login">
     <div class="logo">
       <div class="inner">
-        <img @click="backHome()" src="@/assets/images/home/logo.png" />
+        <img @click="backHome()" src="@/assets/images/home/pfen.png" />
       </div>
     </div>
     <div class="login_form">
@@ -41,35 +41,24 @@
               <b>
                 <a @click="$router.push(`/resetPassword`)">忘记密码</a>
               </b>
-              |
-              <b>无法验证</b>
             </p>
           </div>
-          <div class="four" @click="login">登 录</div>
+          <div class="loginPF">
+            <div class="four" @click="login">登 录</div>
+          </div>
+
           <div class="five">
             <a @click="$router.push(`/register`)">注册</a>
           </div>
         </div>
       </div>
     </div>
-    <footer>
-      <div class="list1">
-        <ul class="lists">
-          <li>关于我们</li>
-          <li>友情链接</li>
-          <li>关于我们</li>
-          <li>友情链接</li>
-          <li>关于我们</li>
-          <li>友情链接</li>
-          <li>关于我们</li>
-          <li>友情链接</li>
-        </ul>
-      </div>
-    </footer>
+    <Footer> </Footer>
   </div>
 </template>
 <script>
 import { login } from "../api/home.js";
+import Footer from "../components/footer";
 export default {
   data() {
     return {
@@ -79,6 +68,9 @@ export default {
       nullId: false, //输入框不能为空错误提示
       numberId: false //用户名格式不正确错误提示
     };
+  },
+  components: {
+    Footer
   },
   methods: {
     // 点击扑粉网图片 返回主页
@@ -168,7 +160,7 @@ export default {
     async _login(username, password) {
       const res = await login(username, password);
       this.numberId = false;
-      if (res.code == "3") {
+      if (res.code == "10") {
         this.curId = true;
         this.uBorderId = true;
         this.wBorderId = true;
@@ -207,8 +199,10 @@ export default {
     }
     img {
       position: absolute;
-      height: 103px;
+      height: 153px;
+      width: 270px;
       left: 0px;
+      top: -15px;
       cursor: pointer;
     }
   }
@@ -294,17 +288,29 @@ export default {
           }
         }
       }
-      .four {
-        width: 100%;
-        height: 50px;
-        line-height: 50px;
-        color: #fff;
-        text-align: center;
-        margin-top: 60px;
-        border-radius: 3px;
-        background-color: #ff068f;
-        cursor: pointer;
+      .loginPF {
+        position: relative;
+        .opa {
+          position: absolute;
+          width: 100%;
+          height: 50px;
+          border: 1px solid #ccc;
+          cursor: pointer;
+          opacity: 0;
+        }
+        .four {
+          width: 100%;
+          height: 50px;
+          line-height: 50px;
+          color: #fff;
+          text-align: center;
+          margin-top: 60px;
+          border-radius: 3px;
+          background-color: #ff068f;
+          cursor: pointer;
+        }
       }
+
       .five {
         cursor: pointer;
         float: right;

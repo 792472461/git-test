@@ -12,26 +12,17 @@
         <p>3秒后跳转，或<span>点击跳转</span></p>
       </div>
     </div>
-    <footer>
-      <div class="list1">
-        <ul class="lists">
-          <li>关于我们</li>
-          <li>友情链接</li>
-          <li>关于我们</li>
-          <li>友情链接</li>
-          <li>关于我们</li>
-          <li>友情链接</li>
-          <li>关于我们</li>
-          <li>友情链接</li>
-        </ul>
-      </div>
-    </footer>
+    <Footer></Footer>
   </div>
 </template>
 <script>
+import Footer from "../components/footer";
 export default {
   data() {
     return {};
+  },
+  components: {
+    Footer
   },
   methods: {}
 };

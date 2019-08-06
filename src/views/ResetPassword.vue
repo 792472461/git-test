@@ -1,22 +1,5 @@
 <template>
   <div>
-    <!-- <div class="title">
-            <div class="top area">
-                <div class="logo"><img src="" alt="">logo</div>
-                <div class="ser-right">
-                <span class="search">
-                    <input type="text" placeholder="摩登兄弟">
-                    <button @click="search()"></button>
-                    <img @click="search()" class="bigGlass" src="@/assets/images/home/bigGlass.png" alt="">
-                </span>
-                <img class="headImg" src="" alt="">
-                <span class="help">帮助</span>
-                </div>
-            </div>
-            <div class="bgI">
-                <img class="backgroudimg" src="" alt="">
-            </div>
-        </div> -->
     <Header></Header>
     <div class="content area">
       <div class="flow">
@@ -61,7 +44,7 @@
             />
           </p>
           <p>
-            <span>确认密码</span>
+            <span>确认新密码</span>
             <input
               placeholder="密码(6-16个字符组成，区分大小写)"
               v-model="surePassword"
@@ -96,16 +79,14 @@
         </div>
       </div>
     </div>
-    <footer>
-      暂无页脚
-    </footer>
+    <Footer> </Footer>
   </div>
 </template>
 <script>
-// import Cookies from 'js-cookie'
 import { sendCaptcha, sendEmail, resetPwd } from "../api/home.js";
 import redTick from "@/assets/images/home/redTick.png";
 import grayTick from "@/assets/images/home/grayTick.png";
+import Footer from "../components/footer";
 export default {
   data() {
     return {
@@ -133,10 +114,14 @@ export default {
       phoneEmailNumber: ""
     };
   },
+  components: {
+    Footer
+  },
   methods: {
     wFocus() {
       this.curId = false;
     },
+
     newBlur() {
       var reg = /^[a-zA-Z0-9]{6,10}$/;
       if (this.newPassword != "") {
@@ -175,11 +160,13 @@ export default {
         }
       }
     },
+
     callback() {
       this.show = 3;
       this.czok = this.grayTick;
       console.log("恭喜重置成功");
     },
+
     changeOk() {
       if (this.yzm === "") {
         this.yzmId = true;
@@ -206,11 +193,9 @@ export default {
         window.clearInterval(this.timer);
         this.timer = null;
         this.vCode = "获取验证码";
-        // this.check = 0
       } else {
         this.i--;
         this.vCode = this.i + "s";
-        // this.check = 1
       }
     },
 
@@ -263,6 +248,7 @@ export default {
           this.passId = false;
         }
       }
+
       // if (this.wordId === true) {
       //   return
       // }
@@ -304,7 +290,6 @@ export default {
     margin: 0 auto;
     height: 68px;
     width: 1200px;
-    // border: 1px solid blue;
     .logo {
       float: left;
       height: 36px;
@@ -321,13 +306,11 @@ export default {
       width: 500px;
       height: 50px;
       float: right;
-      // border: 1px solid red;
       margin-top: 5px;
       position: relative;
       .search {
         width: 350px;
         height: 40px;
-        // border: 1px solid red;
         position: absolute;
         right: 120px;
         bottom: 0;
@@ -409,7 +392,6 @@ export default {
   height: 800px;
   width: 1200px;
   margin: 0 auto;
-  // border: 1px solid pink;
   .flow {
     margin-top: 100px;
     width: 100%;
@@ -420,7 +402,6 @@ export default {
     p {
       width: 120px;
       height: 32px;
-      // border: 1px solid blue;
       margin: 0;
       margin-right: 30px;
       margin-left: 30px;
@@ -430,7 +411,6 @@ export default {
         display: inline-block;
         width: 30px;
         height: 30px;
-        // border: 1px solid red;
         border-radius: 50%;
         margin-right: 5px;
       }
@@ -453,9 +433,6 @@ export default {
     margin-top: 100px;
     width: 100%;
     height: 190px;
-    // border: 1px solid red;
-    // display: flex;
-    // justify-content: center;
     position: relative;
     input {
       width: 300px;
@@ -487,7 +464,6 @@ export default {
   }
   .message {
     height: 380px;
-    // border: 1px solid red;
     p {
       margin-top: 30px;
       position: relative;
@@ -556,7 +532,6 @@ export default {
       color: #fff;
       line-height: 40px;
       cursor: pointer;
-      // border-radius: 2px;
     }
     .hit {
       position: absolute;

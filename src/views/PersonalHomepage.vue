@@ -9,12 +9,14 @@
             class="attention"
             v-show="userInfo.followStatus == 0"
             @click="follow"
-          >+ 关注</span>
+            >+ 关注</span
+          >
           <span
             class="attention"
             v-show="userInfo.followStatus == 1"
             @click="following"
-          >已关注</span>
+            >已关注</span
+          >
         </div>
         <div class="intro">
           <h3>{{ userInfo.nickname }}</h3>
@@ -24,33 +26,30 @@
         <div class="right">
           <div class="s">
             <p>关注</p>
-            <p class="nub">{{userInfo.followCount}}</p>
+            <p class="nub">{{ userInfo.followCount }}</p>
           </div>
           <div class="s">
             <p>粉丝</p>
-            <p class="nub">{{userInfo.fansCount}}</p>
+            <p class="nub">{{ userInfo.fansCount }}</p>
           </div>
           <div class="s">
             <p>播放量</p>
-            <p class="nub">{{userInfo.palyNum}}</p>
+            <p class="nub">{{ userInfo.palyNum }}</p>
           </div>
         </div>
       </div>
       <div class="video">
+        <div class="kby" v-show="videoList.length == 0">
+          <img src="~@/assets/images/home/kongbaiye.png" />
+          <p>他还没有上传过视频噢~</p>
+        </div>
         <div class="title">
           TA的视频
         </div>
-        <div
-          class="videos"
-          v-show="1"
-        >
+        <div class="videos" v-show="1">
           <div>
             <div class="content">
-              <div
-                v-for="item in videoList"
-                :key="item.id"
-                class="row-list"
-              >
+              <div v-for="item in videoList" :key="item.id" class="row-list">
                 <div
                   class="smarllImg"
                   @click="$router.push(`/play?videoId=${item.id}`)"
@@ -59,88 +58,81 @@
                 </div>
                 <div class="centent">
                   <div class="tops">
-                    <span class="cont p">周杰伦现身录音室开始录歌与朋友与朋友一起边喝唱第三方</span>
+                    <span class="cont p">{{ item.describe }}</span>
                   </div>
                   <div class="share">
-                    <span class="see1">{{item.browse_num}}</span>
-                    <span class="see1 love1">{{item.like_num}}</span>
-                    <span class="see1 share1">{{item.share_num}}</span>
+                    <span class="see1">{{ item.browse_num }}</span>
+                    <span class="see1 love1">{{ item.like_num }}</span>
+                    <span class="see1 share1">{{ item.share_num }}</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="paging">
-              <ul>
-                <li class="pre">上一页</li>
-                <li>1</li>
-                <li>2</li>
-                <li class="next">下一页</li>
-              </ul>
-            </div>
           </div>
         </div>
-        <div
-          class="noVideo"
-          v-show="0"
-        >
+        <div class="noVideo" v-show="0">
           <span>他还没有上传过视频哦~</span>
         </div>
       </div>
     </div>
-    <footer>暂无页脚</footer>
+    <Footer></Footer>
   </div>
 </template>
 <script>
-import { userPage, followUser, cancelFollow } from '../api/home.js'
+import { userPage, followUser, cancelFollow } from "../api/home.js";
+import Footer from "../components/footer";
 export default {
   data() {
     return {
       userInfo: {},
-      followId: '',
+      followId: "",
       videoList: []
-    }
+    };
   },
   computed: {
     userId() {
-      return this.$route.query.userId
+      return this.$route.query.userId;
     }
   },
+  components: {
+    Footer
+  },
   created() {
-    this._userPage(this.userId)
+    this._userPage(this.userId);
   },
   methods: {
     //  个人主页
     async _userPage() {
-      const res = await userPage(this.userId)
-      this.userInfo = res.data
-      this.videoList = res.data.videoList
+      const res = await userPage(this.userId);
+      this.userInfo = res.data;
+      this.videoList = res.data.videoList;
     },
     follow() {
-      this._followUser(this.userId)
+      this._followUser(this.userId);
     },
     following() {
-      this._cancelFollow(this.userId)
+      this._cancelFollow(this.userId);
     },
     //  关注用户
     async _followUser(id) {
-      const res = await followUser(id)
-      if (res.code === '-1') {
+      const res = await followUser(id);
+      if (res.code === "-1") {
         this.$router.push({
-          path: '/login'
-        })
-      } else if (res.code === '1') {
-        this._userPage(this.userId)
+          path: "/login"
+        });
+      } else if (res.code === "1") {
+        this._userPage(this.userId);
       }
     },
     //  取消关注
     async _cancelFollow(id) {
-      const res = await cancelFollow(id)
-      if (res.code === '1') {
-        this._userPage(this.userId)
+      const res = await cancelFollow(id);
+      if (res.code === "1") {
+        this._userPage(this.userId);
       }
     }
   }
-}
+};
 </script>
 <style lang="less" scoped>
 .center {
@@ -148,10 +140,10 @@ export default {
   height: auto;
   margin: 0 auto;
   .tit {
-    height: 493px;
+    height: 453px;
     width: 100%;
-    border-bottom: 1px solid #777777;
-    padding-top: 80px;
+    border-bottom: 1px solid #d8d8d8;
+    padding-top: 60px;
     .imgs {
       float: left;
       width: 250px;
@@ -182,11 +174,14 @@ export default {
     .intro {
       width: 400px;
       height: auto;
-      // border: 1px solid red;
       float: left;
       margin-left: 65px;
       text-align: left;
       margin-top: 31px;
+      .intros {
+        font-size: 16px;
+        color: #7e7e7e;
+      }
       h3 {
         font-size: 40px;
         color: #303030;
@@ -217,6 +212,7 @@ export default {
         float: left;
         margin-left: 30px;
         text-align: center;
+        cursor: pointer;
         p {
           font-size: 20px;
         }
@@ -228,8 +224,26 @@ export default {
     }
   }
   .video {
+    position: relative;
     width: 100%;
     height: auto;
+    margin-bottom: 350px;
+    .kby {
+      position: absolute;
+      width: 200px;
+      left: 50%;
+      top: 150px;
+      margin-left: -75px;
+      img {
+        width: 150px;
+        height: 100px;
+      }
+      p {
+        padding-top: 20px;
+        font-size: 18px;
+        color: #e6469a;
+      }
+    }
     .title {
       font-size: 40px;
       margin-top: 87px;
@@ -249,7 +263,6 @@ export default {
       margin-top: 60px;
       width: 100%;
       height: auto;
-      // border: 1px solid red;
       overflow: hidden;
       position: relative;
       .content {
@@ -332,7 +345,7 @@ export default {
               float: left;
               width: 65px;
               height: 22px;
-              background: url('~@/assets/images/home/love1.png') no-repeat 0 0;
+              background: url("~@/assets/images/home/love1.png") no-repeat 0 0;
               background-size: auto 18px;
               font-size: 12px;
               padding-left: 25px;

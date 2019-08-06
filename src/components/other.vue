@@ -19,7 +19,7 @@
           </div>
           <div class="centent">
             <div class="tops">
-              <span class="cont p">{{ item.describe }}</span>
+              <span class="cont p">{{ item.name }}</span>
             </div>
             <div class="share">
               <span class="see1">{{ item.browse_num }}</span>

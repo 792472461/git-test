@@ -39,7 +39,7 @@
           <ul>
             <li class="left">
               <img :src="avatar" />
-              <span>上传证件正面照2M</span>
+              <span>上传证件背面照2M</span>
               <a href="javascript:;" class="file">
                 点击上传
                 <input
@@ -76,12 +76,11 @@
       </div>
       <div class="mask" v-show="curId"></div>
     </div>
-    <footer class="footer">
-      暂无页脚
-    </footer>
+    <Footer> </Footer>
   </div>
 </template>
 <script>
+import Footer from "../components/footer";
 import { uploadImg, userVerify } from "../api/home.js";
 import Cookies from "js-cookie";
 export default {
@@ -98,13 +97,15 @@ export default {
       avatarBack: require("../assets/images/home/card_b.png")
     };
   },
+  components: {
+    Footer
+  },
   methods: {
     //  上传图片
     async _uploadImg(formData, type) {
       const res = await uploadImg(formData);
       if (type === "front" && res.code === "1") {
         this.frontImg = res.data.imgPath;
-        console.log(this.frontImg, "99");
       } else if (type === "back" && res.code === "1") {
         this.backImg = res.data.imgPath;
       }
@@ -120,7 +121,7 @@ export default {
       this._uploadImg(formData, "front");
 
       reader.readAsDataURL(file);
-      reader.onload = function(e) {
+      reader.onload = function() {
         that.avatar = this.result;
       };
     },
@@ -135,7 +136,7 @@ export default {
       this._uploadImg(formData, "back");
 
       reader.readAsDataURL(file);
-      reader.onload = function(e) {
+      reader.onload = function() {
         that.avatarBack = this.result;
       };
     },
@@ -227,10 +228,13 @@ export default {
     margin: 0 auto;
     margin-bottom: 570px;
     .smyz {
-      height: 70px;
-      line-height: 70px;
+      height: 90px;
+      line-height: 90px;
       border-bottom: 1px solid #ccc;
-      font-size: 18px;
+      font-size: 22px;
+      color: #e64c7e;
+      text-align: left;
+      font-weight: bold;
     }
     .form {
       .first {
