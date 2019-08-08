@@ -37,6 +37,7 @@
             <span v-show="curId">登录账号或密码错误</span>
             <span v-show="nullId">输入框不能为空</span>
             <span v-show="numberId">用户名格式不正确</span>
+            <span v-show="nozc">该账号不存在</span>
             <p>
               <b>
                 <a @click="$router.push(`/resetPassword`)">忘记密码</a>
@@ -62,6 +63,7 @@ import Footer from "../components/footer";
 export default {
   data() {
     return {
+      nozc: false, // 该账号不存在
       uBorderId: false, //input边框错误提示
       wBorderId: false, //input边框错误提示
       curId: false, //登录账号或密码错误错误提示
@@ -166,6 +168,11 @@ export default {
         this.wBorderId = true;
       } else {
         this.curId = false;
+      }
+      if (res.code == "3") {
+        this.nozc = true;
+      } else {
+        this.nozc = false;
       }
       if (res.code == "1") {
         var accesstoken = res.data.accesstoken;

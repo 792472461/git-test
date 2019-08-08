@@ -116,7 +116,7 @@
 <script>
 import redTick from "@/assets/images/home/redTick.png";
 import grayTick from "@/assets/images/home/grayTick.png";
-import { bindEmail, sendEmail, checkCaptcha } from "../api/home.js";
+import { bindEmail, sendEmail, checkCaptcha, sendCaptcha } from "../api/home.js";
 import Footer from "../components/footer";
 export default {
   data() {
@@ -267,6 +267,23 @@ export default {
       }
     },
 
+    //  发送手机验证码
+    async _sendCaptcha(type, mobile) {
+      const res = await sendCaptcha(type, mobile);
+      if (res.code == "1") {
+        if (this.i == -1) {
+          this.i = 60;
+          this.timer = setInterval(this.setTime, 1000);
+          this.vCode = this.i + "s";
+          this.check = 1;
+          this.yzmHit1 = false;
+          this.yzmHit2 = false;
+        } else {
+          console.log(this.i + "秒后才可再次获取验证码");
+        }
+      }
+    },
+
     // 发送邮箱验证码
     async _sendEmail(email, type) {
       const res = await sendEmail(email, type);
@@ -397,8 +414,14 @@ export default {
     sendCode() {
       this.state = this.$route.query.state;
       var state = this.state.indexOf("绑定成功");
-      if (state != -1 && this.yzsj != "") {
-        this._sendEmail(this.yzsj, 1);
+      var state1 = this.state.indexOf("绑定邮箱");
+      var state2 = this.state.indexOf("绑定手机");
+      if (state != -1 && state1 != -1 && this.yzsj != "") {
+        var type = 1;
+        this._sendCaptcha(type, this.yzsj);
+      } else if (state != -1 && state2 != -1 && this.yzsj != "") {
+        var type1 = 1;
+        this._sendEmail(this.yzsj, type1);
       }
     }
   },

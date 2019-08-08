@@ -200,8 +200,8 @@ export default {
     },
 
     //  发送手机验证码
-    async _sendCaptcha(number) {
-      const res = await sendCaptcha(number);
+    async _sendCaptcha(type, number) {
+      const res = await sendCaptcha(type, number);
       console.log(res);
     },
 
@@ -261,8 +261,8 @@ export default {
         if (this.phoneEmail === "邮箱") {
           this._sendEmail(this.number, 2);
         } else if (this.phoneEmail === "手机") {
-          // this._sendCaptcha()
-          console.log("手机");
+          var type = 2;
+          this._sendCaptcha(type, this.number);
         }
         this.i = 60;
         this.timer = setInterval(this.setTime, 1000);
@@ -389,8 +389,8 @@ export default {
   }
 }
 .content {
-  height: 800px;
   width: 1200px;
+  height: 800px;
   margin: 0 auto;
   .flow {
     margin-top: 100px;
@@ -430,7 +430,7 @@ export default {
     }
   }
   .confirm {
-    margin-top: 100px;
+    margin-top: 70px;
     width: 100%;
     height: 190px;
     position: relative;
@@ -441,6 +441,7 @@ export default {
       outline: none;
       padding-left: 10px;
       padding-right: 10px;
+      border-radius: 5px;
     }
     .noNull {
       color: red;

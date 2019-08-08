@@ -11,6 +11,9 @@
           <div class="suc" v-show="zccg">
             注册成功<i @click="closeZccg">x</i>
           </div>
+          <div class="suc" v-show="zccg1">
+            注册失败<i @click="closeZccg1">x</i>
+          </div>
           <div class="tit">账号注册</div>
           <div class="first">
             <input
@@ -124,6 +127,7 @@ import {
 export default {
   data() {
     return {
+      zccg1: false, // 注册失败弹窗
       zccg: false, // 注册成功弹窗
       uValue: "", // 昵称内容
       wValue: "", // 密码内容
@@ -198,6 +202,11 @@ export default {
           name: "login"
         }
       });
+    },
+
+    // 关闭注册失败弹窗
+    closeZccg1() {
+      this.zccg1 = false;
     },
 
     agreement() {
@@ -354,6 +363,7 @@ export default {
         this.nBorderId = true;
         return;
       }
+
       if (number === "" && this.selected === "email") {
         this.aWriteId = true;
         this.nBorderId = true;
@@ -369,6 +379,7 @@ export default {
         this.nBorderId = true;
         return;
       }
+
       if (
         number != "" &&
         this.selected === "email" &&
@@ -463,8 +474,12 @@ export default {
       var password = this.wValue;
       var number = this.nValue;
       var value = this.yValue;
-      await emailRegister(number, value, nickname, password);
-      this.zccg = true;
+      const res = await emailRegister(number, value, nickname, password);
+      if (res.code == "1") {
+        this.zccg = true;
+      } else {
+        this.zccg1 = true;
+      }
     }
   }
 };

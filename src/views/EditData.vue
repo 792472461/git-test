@@ -57,7 +57,7 @@
             <span class="intro">简介：</span>
             <textarea v-model="score"></textarea>
           </p>
-          <div class="bqtitb">
+          <!-- <div class="bqtitb">
             <div class="bqtit">标签：</div>
             <div class="bq-box">
               <div class="bq">
@@ -73,7 +73,7 @@
                 >
               </div>
             </div>
-          </div>
+          </div> -->
           <p>
             <button @click="sure">确认修改</button>
           </p>

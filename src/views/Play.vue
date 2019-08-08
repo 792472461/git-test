@@ -1448,10 +1448,11 @@ export default {
     width: 1200px;
     height: 74px;
     box-shadow: 10px 10px 10px #e0e0e0;
+    border-radius: 0px 0px 10px 5px;
     p {
       margin: 0;
       padding: 0;
-      margin-top: 25px;
+      margin-top: 20px;
     }
     .seeLove {
       padding-left: 15px;
@@ -1508,7 +1509,6 @@ export default {
       padding: 16px;
       font-size: 14px;
       text-align: left;
-      // margin-top: 28px;
       border-radius: 5px;
     }
     .videoLabel {
@@ -1619,7 +1619,7 @@ export default {
         font-size: 16px;
         border: 2px solid #d2d2d2;
         box-shadow: inset 0px 0px 10px #ccc;
-        border-radius: 5px;
+        border-radius: 10px;
       }
     }
     .sedComment {
@@ -1670,6 +1670,7 @@ export default {
     }
     .list {
       margin-top: 24px;
+      margin-bottom: 150px;
       .lists {
         width: 100%;
         height: auto;

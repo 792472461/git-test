@@ -33,7 +33,7 @@ function checkaccount(account) {
 }
 
 // 发送手机验证码
-function sendCaptcha(mobile, type) {
+function sendCaptcha(type, mobile) {
   let data = {
     type: type,
     mobile: mobile

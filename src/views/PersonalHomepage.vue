@@ -58,7 +58,7 @@
                 </div>
                 <div class="centent">
                   <div class="tops">
-                    <span class="cont p">{{ item.describe }}</span>
+                    <span class="cont p">{{ item.name }}</span>
                   </div>
                   <div class="share">
                     <span class="see1">{{ item.browse_num }}</span>
@@ -227,7 +227,7 @@ export default {
     position: relative;
     width: 100%;
     height: auto;
-    margin-bottom: 350px;
+    margin-bottom: 200px;
     .kby {
       position: absolute;
       width: 200px;
@@ -276,11 +276,9 @@ export default {
         height: 210px;
         margin-top: 20px;
         margin-right: 25px;
-        // border: 1px solid blue;
         .smarllImg {
           width: 188px;
           height: 108px;
-          // border: 1px solid red;
           position: relative;
           border-radius: 10px;
           box-shadow: 0px 3px 5px #ccc;
@@ -327,6 +325,9 @@ export default {
             .p {
               width: 188px;
               text-align: left;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
             }
           }
           .share {
@@ -369,7 +370,6 @@ export default {
         position: relative;
         bottom: 0;
         left: 0;
-        // border: 1px solid red;
         ul {
           height: 30px;
           width: auto;

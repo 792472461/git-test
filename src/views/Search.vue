@@ -261,8 +261,7 @@ export default {
 }
 .title {
   width: 100%;
-  height: 440x;
-  background: #e5d0e2;
+  height: 440px;
   .top {
     margin: 0 auto;
     height: 91px;

@@ -4,17 +4,17 @@
  */
 
 module.exports = {
-    publicPath: './',
-    devServer: {
-        proxy: {
-            '/req': {
-                target: "http://fapi.mimanduo.xyz/",
-                // ws: true,
-                // changeOrigin: true,
-                pathRewrite: {
-                    '^/req': ''
-                }
-            }
+  publicPath: "./",
+  devServer: {
+    proxy: {
+      "/req": {
+        target: "http://fapi.mimanduo.xyz/",
+        // ws: true,
+        // changeOrigin: true,
+        pathRewrite: {
+          "^/req": ""
         }
+      }
     }
-}
+  }
+};
