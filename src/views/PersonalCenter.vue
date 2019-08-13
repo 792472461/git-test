@@ -107,6 +107,10 @@
             </div>
             <div @click="cgx()" class="dra">草稿箱</div>
           </div>
+          <div class="noMyVideo" v-show="myVideoList.length == 0">
+            <img src="~@/assets/images/home/blank.png" />
+            <p>您还没有上传过视频</p>
+          </div>
           <div class="lis">
             <ul>
               <li v-for="item in myVideoList" :key="item.id">
@@ -167,6 +171,10 @@
           <span class="title">收藏的视频</span>
         </div>
         <div class="col-video">
+          <div class="noMyVideo" v-show="list.length == 0">
+            <img src="~@/assets/images/home/blank.png" />
+            <p>您还没有收藏过视频</p>
+          </div>
           <div class="col-videos" v-for="(item, index) in list" :key="index">
             <p class="imgh" @click="$router.push(`/play?videoId=${item.id}`)">
               <img :src="item.cover_img" />
@@ -202,6 +210,10 @@
           </p>
         </div>
         <div class="col-video">
+          <div class="noMyVideo" v-show="historyList.length == 0">
+            <img src="~@/assets/images/home/blank.png" />
+            <p>您还没有浏览记录</p>
+          </div>
           <div
             class="col-videos"
             v-for="(item, index) in historyList"
@@ -239,6 +251,10 @@
           <div class="drafts">
             <img @click="back()" src="@/assets/images/home/drafts-lt.png" />
             <span class="cgx">草稿箱</span>
+          </div>
+          <div class="noMyVideo" v-show="cgxList.length == 0">
+            <img src="~@/assets/images/home/blank.png" />
+            <p>您还没有保存到草稿箱的视频</p>
           </div>
           <div class="lis">
             <ul>
@@ -724,6 +740,13 @@ export default {
   height: auto;
   float: left;
   margin-top: 12px;
+  .noMyVideo {
+    padding-top: 150px;
+    img {
+      width: 180px;
+      height: 180px;
+    }
+  }
   .drafts {
     margin-top: 70px;
     width: 980px;
@@ -731,6 +754,9 @@ export default {
     border-bottom: 1px solid #e3e3e3;
     overflow: hidden;
     margin-left: 40px;
+    img {
+      cursor: pointer;
+    }
     .dra {
       width: 100px;
       height: 40px;
@@ -930,7 +956,6 @@ export default {
       width: 25px;
       height: 25px;
       border-radius: 50%;
-      // background: #ccc;
       float: left;
     }
     span {
@@ -942,6 +967,13 @@ export default {
   float: left;
   width: 1010px;
   height: auto;
+  .noMyVideo {
+    padding-top: 150px;
+    img {
+      width: 180px;
+      height: 180px;
+    }
+  }
   .col-videos {
     margin-top: 30px;
     width: 225px;

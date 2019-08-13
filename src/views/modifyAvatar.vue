@@ -23,6 +23,7 @@
           </a>
         </div>
       </div>
+      <p>只支持jpg后缀的图片</p>
       <div class="sure" @click="modify">确定</div>
     </div>
     <Footer></Footer>
@@ -193,6 +194,7 @@ export default {
   }
   .sure {
     margin: 0 auto;
+    margin-top: 50px;
     margin-bottom: 250px;
     width: 100px;
     height: 35px;

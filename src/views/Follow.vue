@@ -132,12 +132,15 @@ ul li {
     .list_follow {
       margin: 0px;
       padding: 0px;
+      .list:last-child {
+        margin-bottom: 350px;
+      }
       .list {
         position: relative;
         height: 208px;
         border-bottom: 1px solid #dadada;
         padding: 0px;
-        margin-bottom: 350px;
+
         .user_img {
           position: absolute;
           left: 34px;

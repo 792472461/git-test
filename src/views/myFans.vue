@@ -132,6 +132,9 @@ ul li {
     .list_follow {
       margin: 0px;
       padding: 0px;
+      .list:last-child {
+        margin-bottom: 350px;
+      }
       .list {
         position: relative;
         height: 208px;

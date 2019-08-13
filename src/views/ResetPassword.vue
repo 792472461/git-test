@@ -29,8 +29,8 @@
         <button @click="phoneOk()">确认</button>
       </div>
       <div class="confirm" v-show="show == 2">
-        您的密码已修改成功，3S后自动跳转登录页
-        <button @click="callback()">返回</button>
+        您的密码已修改成功
+        <button @click="callback()">去登录页</button>
       </div>
       <div class="confirm message" v-show="show == 3">
         <div>
@@ -162,9 +162,9 @@ export default {
     },
 
     callback() {
-      this.show = 3;
-      this.czok = this.grayTick;
-      console.log("恭喜重置成功");
+      this.$router.push({
+        path: "/login"
+      });
     },
 
     changeOk() {

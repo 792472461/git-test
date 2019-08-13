@@ -97,12 +97,12 @@
               <p>绑定手机后即可使用手机号登陆</p>
               <p class="bind">
                 <span
-                  @click="changePhone(1)"
+                  @click="status.is_mobile == 1 ? Phone() : changePhone(1)"
                   :class="status.is_mobile == 1 ? 'binding2' : 'binding1'"
                   >{{ status.is_mobile == 1 ? "已绑定" : "去绑定" }}</span
                 >
                 <span
-                  v-show="status.is_mobile == 0"
+                  v-show="status.is_mobile == 1"
                   @click="changePhone(2)"
                   class="binding3"
                   >更改绑定手机 &gt;</span
@@ -128,7 +128,7 @@
               <p>绑定邮箱后即可使用邮箱号登陆</p>
               <p class="bind">
                 <span
-                  @click="changePhone(3)"
+                  @click="status.is_email == 1 ? Phone() : changePhone(3)"
                   :class="status.is_email == 1 ? 'binding2' : 'binding1'"
                   >{{ status.is_email == 1 ? "已绑定" : "去绑定" }}
                 </span>
@@ -223,6 +223,10 @@ export default {
     Footer
   },
   methods: {
+    Phone() {
+      return
+    },
+
     sureOk() {
       if (this.arr.length < 4 && this.arr.indexOf(this.tag) == "-1") {
         this.arr.push(this.tag);
